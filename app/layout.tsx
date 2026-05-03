@@ -5,6 +5,7 @@ import { CartProvider } from "@/app/context/CartContext";
 import Navbar from "@/app/components/Navbar";
 import Cart from "@/app/components/Cart";
 import Footer from "@/app/components/Footer";
+import Script from "next/script";
 
 const spaceGrotesk = Space_Grotesk({
     variable: "--font-sans",
@@ -20,6 +21,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="fr" className={spaceGrotesk.variable}>
+            <head>
+                <Script src="https://tracker-production-9a75.up.railway.app/track.js?id=f9e291c2-0fea-4b24-8abb-57264e001cd3" strategy="afterInteractive" />
+            </head>
             <body>
                 <CartProvider>
                     <Navbar />

@@ -1,10 +1,32 @@
 "use client";
 
+import { useState } from "react";
 import { useCart } from "@/app/context/CartContext";
 import Link from "next/link";
 
 export default function Cart() {
     const { items, isOpen, closeCart, removeItem, updateQty, totalPrice } = useCart();
+    const [checkingOut, setCheckingOut] = useState(false);
+    const [checkoutError, setCheckoutError] = useState<string | null>(null);
+
+    const handleCheckout = async () => {
+        if (checkingOut) return;
+        setCheckingOut(true);
+        setCheckoutError(null);
+        try {
+            const res = await fetch("/api/checkout", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ items }),
+            });
+            const data = await res.json();
+            if (!res.ok || !data.url) throw new Error(data.error || "Erreur");
+            window.location.href = data.url;
+        } catch (err) {
+            setCheckoutError("Une erreur est survenue. Veuillez réessayer.");
+            setCheckingOut(false);
+        }
+    };
 
     return (
         <>
@@ -111,8 +133,16 @@ export default function Cart() {
                             ou <strong style={{ color: "var(--fg)" }}>{(totalPrice / 4).toFixed(0)} €/mois</strong> en 4× sans frais
                         </p>
 
-                        <button className="btn-primary" style={{ width: "100%", justifyContent: "center", opacity: 0.5, cursor: "not-allowed" }} disabled>
-                            Passer commande — bientôt disponible
+                        {checkoutError && (
+                            <p style={{ fontSize: "0.78rem", color: "#ef4444", textAlign: "center", marginBottom: 10 }}>{checkoutError}</p>
+                        )}
+                        <button
+                            className="btn-primary"
+                            style={{ width: "100%", justifyContent: "center", opacity: checkingOut ? 0.7 : 1, cursor: checkingOut ? "not-allowed" : "pointer" }}
+                            onClick={handleCheckout}
+                            disabled={checkingOut}
+                        >
+                            {checkingOut ? "Redirection..." : "Passer commande"}
                         </button>
 
                         {/* Reassurance */}
