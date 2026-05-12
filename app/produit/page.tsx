@@ -11,17 +11,16 @@ const IMAGES = [
     "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=900&q=85",
 ];
 
-const SIZES = ["S", "M", "L", "XL"];
+const SIZES = [
+    { key: "M", label: "M", desc: "< 180 cm" },
+    { key: "L", label: "L", desc: "> 180 cm" },
+];
 
 const SPECS = [
-    { label: "Pression", value: "30 – 240 mmHg" },
-    { label: "Zones de compression", value: "6 zones séquentielles" },
-    { label: "Niveaux de pression", value: "12 niveaux" },
-    { label: "Durée de charge", value: "2h (USB-C)" },
-    { label: "Autonomie", value: "4h d'utilisation" },
-    { label: "Poids", value: "1,4 kg la paire" },
-    { label: "Matière", value: "Nylon technique + néoprène" },
-    { label: "Certification", value: "CE Médical" },
+    { label: "Technologie", value: "Pneumatique — compression par air" },
+    { label: "Chambres", value: "4 chambres séquentielles" },
+    { label: "Connectivité", value: "Sans fil — Wireless + Télécommande" },
+    { label: "Recharge", value: "USB-C — câble Type-C inclus" },
 ];
 
 const FAQ = [
@@ -31,7 +30,7 @@ const FAQ = [
     },
     {
         q: "Quelle taille choisir ?",
-        a: "Mesurez votre mollet à son point le plus large. S = jusqu'à 36 cm, M = 36–40 cm, L = 40–44 cm, XL = 44 cm et plus. En cas de doute, prenez la taille supérieure.",
+        a: "Le choix se fait selon votre taille : M pour les personnes mesurant moins de 180 cm, L pour celles mesurant plus de 180 cm. En cas de doute, prenez la taille L.",
     },
     {
         q: "Peut-on utiliser Ad Boots chaque jour ?",
@@ -53,18 +52,34 @@ const REVIEWS = [
     { name: "Lucas D.", sport: "CrossFit", note: 5, text: "2 entraînements par jour sans Ad Boots, c'est impossible. Maintenant c'est ma norme." },
 ];
 
+const BENEFITS = [
+    { icon: "⚡", title: "Récupération accélérée", desc: "La compression séquentielle à 4 chambres stimule la circulation et élimine les toxines musculaires après l'effort." },
+    { icon: "📶", title: "100% Sans fil", desc: "Liberté de mouvement totale. Contrôle via télécommande dédiée, sans aucun câble de contrainte." },
+    { icon: "🎯", title: "Usage polyvalent", desc: "Idéal pour les sportifs, les actifs debout toute la journée, et la gestion des jambes lourdes au quotidien." },
+    { icon: "🎁", title: "Kit complet inclus", desc: "Boîte cadeau premium, sac de transport, télécommande et câble Type-C — tout est inclus dès l'ouverture." },
+];
+
+const KIT = [
+    { qty: "×2", label: "Manchons pour jambes" },
+    { qty: "×1", label: "Télécommande sans fil" },
+    { qty: "×1", label: "Câble de recharge Type-C" },
+    { qty: "×1", label: "Sac de transport" },
+    { qty: "×1", label: "Boîte cadeau premium" },
+];
+
 export default function ProduitPage() {
     const [activeImg, setActiveImg] = useState(0);
-    const [activeSize, setActiveSize] = useState("");
+    const [activeSize, setActiveSize] = useState<string>("");
     const [openFaq, setOpenFaq] = useState<number | null>(null);
     const [added, setAdded] = useState(false);
+    const [activeTab, setActiveTab] = useState<"benefits" | "specs" | "kit">("benefits");
     const { addItem } = useCart();
 
     const handleAddToCart = () => {
         if (!activeSize) return;
         addItem({
             id: "adboots-pro",
-            name: "Ad Boots Pro",
+            name: "AD Boots Pro",
             price: 350,
             size: activeSize,
             image: IMAGES[0],
@@ -115,9 +130,16 @@ export default function ProduitPage() {
                         {/* Info */}
                         <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
                             <div>
-                                <div className="tag" style={{ marginBottom: 16 }}>✓ En stock — Expédition sous 48h</div>
-                                <h1 className="heading-xl" style={{ marginBottom: 8 }}>Ad Boots Pro</h1>
-                                <p style={{ color: "var(--muted)", fontSize: "0.9rem" }}>Bottes de récupération par pressothérapie</p>
+                                <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 16 }}>
+                                    <div className="tag">✓ En stock</div>
+                                    <div className="tag" style={{ background: "rgba(239,68,68,0.08)", borderColor: "rgba(239,68,68,0.2)", color: "#f87171" }}>🔥 Stock limité</div>
+                                </div>
+                                <h1 className="heading-xl" style={{ marginBottom: 8 }}>AD Boots Pro</h1>
+                                <p style={{ color: "var(--muted)", fontSize: "0.9rem" }}>Bottes de compression pneumatique sans fil · 4 chambres</p>
+                                <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 12 }}>
+                                    {[1,2,3,4,5].map(s => <span key={s} style={{ color: "var(--accent)", fontSize: "0.9rem" }}>★</span>)}
+                                    <span style={{ fontSize: "0.78rem", color: "var(--muted)", marginLeft: 4 }}>5.0 · 47 avis vérifiés</span>
+                                </div>
                             </div>
 
                             {/* Price */}
@@ -139,11 +161,13 @@ export default function ProduitPage() {
                                 <div className="size-grid">
                                     {SIZES.map(s => (
                                         <button
-                                            key={s}
-                                            className={`size-btn${activeSize === s ? " active" : ""}`}
-                                            onClick={() => setActiveSize(s)}
+                                            key={s.key}
+                                            className={`size-btn${activeSize === s.key ? " active" : ""}`}
+                                            onClick={() => setActiveSize(s.key)}
+                                            style={{ display: "flex", flexDirection: "column", gap: 2, alignItems: "center" }}
                                         >
-                                            {s}
+                                            <span>{s.label}</span>
+                                            <span style={{ fontSize: "0.65rem", opacity: 0.7, fontWeight: 400 }}>{s.desc}</span>
                                         </button>
                                     ))}
                                 </div>
@@ -162,13 +186,22 @@ export default function ProduitPage() {
                                 {added ? "✓ Ajouté au panier" : activeSize ? "Ajouter au panier" : "Sélectionnez une taille"}
                             </button>
 
+                            {/* Paiement sécurisé */}
+                            <div style={{ padding: "16px 20px", background: "var(--bg-surface)", borderRadius: 8, border: "1px solid var(--border)" }}>
+                                <p style={{ fontSize: "0.7rem", color: "var(--muted)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 12 }}>🔒 Paiement 100% sécurisé</p>
+                                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                                    {["VISA", "MC", "CB", "AMEX", "PAYPAL"].map(m => (
+                                        <span key={m} style={{ padding: "4px 10px", border: "1px solid var(--border-strong)", borderRadius: 4, fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em", color: "var(--muted)" }}>{m}</span>
+                                    ))}
+                                </div>
+                            </div>
+
                             {/* Reassurance */}
-                            <div style={{ display: "flex", flexDirection: "column", gap: 10, padding: "20px", background: "var(--bg-surface)", borderRadius: 8, border: "1px solid var(--border)" }}>
+                            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                                 {[
                                     { icon: "🚚", text: "Livraison gratuite en France métropolitaine" },
                                     { icon: "↩", text: "Retour gratuit sous 30 jours" },
-                                    { icon: "✓",  text: "Garantie 2 ans constructeur" },
-                                    { icon: "🔒", text: "Paiement 100% sécurisé" },
+                                    { icon: "✓", text: "Garantie 2 ans constructeur" },
                                 ].map(r => (
                                     <div key={r.text} style={{ display: "flex", gap: 12, alignItems: "center", fontSize: "0.83rem", color: "var(--muted)" }}>
                                         <span style={{ color: "var(--accent)", flexShrink: 0 }}>{r.icon}</span>
@@ -180,7 +213,7 @@ export default function ProduitPage() {
                             {/* Short description */}
                             <div>
                                 <p style={{ fontSize: "0.9rem", lineHeight: 1.8, color: "var(--muted)" }}>
-                                    Ad Boots Pro sont des bottes de compression pneumatique conçues pour les sportifs amateur et semi-professionnels. 12 niveaux de pression, 6 zones de compression séquentielles, batterie longue durée — la récupération professionnelle, accessible à domicile.
+                                    AD Boots Pro sont des bottes de compression pneumatique sans fil à 4 chambres séquentielles. Contrôle via télécommande dédiée, recharge USB-C — la récupération professionnelle, accessible à domicile.
                                 </p>
                             </div>
                         </div>
@@ -188,13 +221,53 @@ export default function ProduitPage() {
                 </div>
             </section>
 
-            {/* ─── Technical Specs ─── */}
-            <section className="section" style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--border)" }}>
+            {/* ─── Tabs Section ─── */}
+            <section style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
                 <div className="container">
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "start" }}>
-                        <div>
-                            <p className="label" style={{ marginBottom: 20 }}>Spécifications Techniques</p>
-                            <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+                    {/* Tab nav */}
+                    <div style={{ display: "flex", borderBottom: "1px solid var(--border)" }}>
+                        {([
+                            { key: "benefits", label: "Bénéfices" },
+                            { key: "specs",    label: "Caractéristiques" },
+                            { key: "kit",      label: "Contenu du kit" },
+                        ] as const).map(t => (
+                            <button
+                                key={t.key}
+                                onClick={() => setActiveTab(t.key)}
+                                style={{
+                                    padding: "18px 28px",
+                                    fontSize: "0.78rem",
+                                    fontWeight: 600,
+                                    letterSpacing: "0.1em",
+                                    textTransform: "uppercase",
+                                    color: activeTab === t.key ? "var(--accent)" : "var(--muted)",
+                                    borderBottom: activeTab === t.key ? "2px solid var(--accent)" : "2px solid transparent",
+                                    marginBottom: "-1px",
+                                    transition: "color 0.2s",
+                                    background: "none",
+                                }}
+                            >
+                                {t.label}
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Tab content */}
+                    <div style={{ padding: "48px 0" }}>
+                        {activeTab === "benefits" && (
+                            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 32 }}>
+                                {BENEFITS.map(b => (
+                                    <div key={b.title}>
+                                        <div style={{ fontSize: "2rem", marginBottom: 16 }}>{b.icon}</div>
+                                        <p style={{ fontFamily: "var(--font-display), 'Barlow Condensed', sans-serif", fontSize: "1.1rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 10 }}>{b.title}</p>
+                                        <p style={{ fontSize: "0.875rem", color: "var(--muted)", lineHeight: 1.75 }}>{b.desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+
+                        {activeTab === "specs" && (
+                            <div style={{ maxWidth: 600 }}>
                                 {SPECS.map((s, i) => (
                                     <div key={s.label} style={{
                                         display: "grid",
@@ -202,39 +275,25 @@ export default function ProduitPage() {
                                         gap: 16,
                                         padding: "16px 0",
                                         borderBottom: "1px solid var(--border)",
-                                        background: i % 2 === 0 ? "transparent" : "rgba(255,255,255,0.015)",
+                                        background: i % 2 === 0 ? "transparent" : "rgba(255,255,255,0.02)",
                                     }}>
                                         <p style={{ fontSize: "0.85rem", color: "var(--muted)" }}>{s.label}</p>
                                         <p style={{ fontSize: "0.85rem", fontWeight: 500 }}>{s.value}</p>
                                     </div>
                                 ))}
                             </div>
-                        </div>
-                        <div>
-                            <p className="label" style={{ marginBottom: 20 }}>Ce qui est inclus</p>
-                            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                                {[
-                                    "1 paire de bottes Ad Boots Pro",
-                                    "1 boîtier de contrôle sans fil",
-                                    "1 câble de charge USB-C",
-                                    "1 sac de transport premium",
-                                    "1 guide d'utilisation FR/EN",
-                                    "1 carte de garantie 2 ans",
-                                ].map(item => (
-                                    <div key={item} style={{ display: "flex", gap: 14, alignItems: "center" }}>
-                                        <div style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--accent)", flexShrink: 0 }} />
-                                        <p style={{ fontSize: "0.875rem", color: "var(--muted)" }}>{item}</p>
+                        )}
+
+                        {activeTab === "kit" && (
+                            <div style={{ display: "flex", flexDirection: "column", gap: 18, maxWidth: 400 }}>
+                                {KIT.map(item => (
+                                    <div key={item.label} style={{ display: "flex", alignItems: "center", gap: 20, padding: "14px 20px", background: "var(--bg-surface-2)", borderRadius: 6, border: "1px solid var(--border)" }}>
+                                        <span style={{ fontSize: "1rem", fontWeight: 800, color: "var(--accent)", minWidth: 32, fontFamily: "var(--font-display), 'Barlow Condensed', sans-serif" }}>{item.qty}</span>
+                                        <p style={{ fontSize: "0.9rem", fontWeight: 500 }}>{item.label}</p>
                                     </div>
                                 ))}
                             </div>
-
-                            <div style={{ marginTop: 40, padding: 24, background: "rgba(75,222,128,0.05)", border: "1px solid rgba(75,222,128,0.15)", borderRadius: 8 }}>
-                                <p style={{ color: "var(--accent)", fontWeight: 700, fontSize: "0.85rem", marginBottom: 8 }}>✓ Certification CE Médical</p>
-                                <p style={{ color: "var(--muted)", fontSize: "0.83rem", lineHeight: 1.75 }}>
-                                    Ad Boots Pro est certifié conforme aux exigences européennes pour les dispositifs médicaux de classe I. Conçu en collaboration avec des kinésithérapeutes du sport.
-                                </p>
-                            </div>
-                        </div>
+                        )}
                     </div>
                 </div>
             </section>

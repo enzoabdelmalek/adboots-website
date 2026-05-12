@@ -7,7 +7,7 @@ const STEPS = [
     { num: "01", title: "Gonflage séquentiel", desc: "Les chambres de la botte se gonflent les unes après les autres, de la cheville vers le genou. Cette séquence imite le mécanisme naturel de la pompe musculaire." },
     { num: "02", title: "Compression active", desc: "La pression appliquée favorise le retour veineux et lymphatique, accélérant l'élimination de l'acide lactique et des métabolites de l'effort." },
     { num: "03", title: "Relâchement contrôlé", desc: "Entre chaque cycle, une phase de décompression permet aux tissus de se réoxygéner. Ce rythme stimule la circulation sans fatiguer les muscles." },
-    { num: "04", title: "Récupération accélérée", desc: "Résultat : moins de courbatures, réduction de l'œdème, sensation de jambes légères. Vos muscles récupèrent jusqu'à 2× plus vite qu'au repos." },
+    { num: "04", title: "Récupération accélérée", desc: "Résultat : moins de courbatures, réduction de l'œdème, sensation de jambes légères. La compression séquentielle accélère significativement la récupération musculaire." },
 ];
 
 const VALUES = [
@@ -91,10 +91,10 @@ export default function PourquoiPage() {
                 <div className="container">
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 40, textAlign: "center" }}>
                         {[
-                            { num: "2×", label: "Récupération plus rapide" },
-                            { num: "30%", label: "De courbatures en moins" },
-                            { num: "6", label: "Zones de compression" },
-                            { num: "12", label: "Niveaux de pression" },
+                            { num: "4", label: "Chambres séquentielles" },
+                            { num: "2", label: "Tailles disponibles (M / L)" },
+                            { num: "USB-C", label: "Recharge universelle" },
+                            { num: "100%", label: "Sans fil — télécommande incluse" },
                         ].map(s => (
                             <div key={s.label}>
                                 <p style={{ color: "var(--accent)", fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1, marginBottom: 10 }}>{s.num}</p>

@@ -6,7 +6,7 @@
     --bg-surface: #F6F6F4;
     --bg-surface-2: #EDEDE9;
     --fg: #0A0A0A;
-    --muted: #6B6B65;
+    --muted: #0A0A0A;
     --accent: #22C55E;
     --accent-hover: #16A34A;
     --border: rgba(0, 0, 0, 0.08);
@@ -27,7 +27,8 @@ html { scroll-behavior: smooth; }
 body {
     background: var(--bg);
     color: var(--fg);
-    font-family: var(--font-sans), "Space Grotesk", system-ui, sans-serif;
+    font-family: var(--font-sans), "Barlow", system-ui, sans-serif;
+    font-size: 25px;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
 }
@@ -38,32 +39,38 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 /* ─── Typography ─── */
 .display {
+    font-family: var(--font-display), "Barlow Condensed", sans-serif;
     font-size: clamp(3.5rem, 9vw, 8rem);
     font-weight: 800;
     line-height: 0.95;
-    letter-spacing: -0.03em;
+    letter-spacing: 0.01em;
     hyphens: none;
     word-break: keep-all;
+    text-transform: uppercase;
 }
 .heading-xl {
+    font-family: var(--font-display), "Barlow Condensed", sans-serif;
     font-size: clamp(2.2rem, 5vw, 4.5rem);
     font-weight: 700;
     line-height: 1.05;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
 }
 .heading-lg {
+    font-family: var(--font-display), "Barlow Condensed", sans-serif;
     font-size: clamp(1.6rem, 3vw, 2.8rem);
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.01em;
     line-height: 1.1;
+    text-transform: uppercase;
 }
 .heading-md {
-    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
     font-weight: 600;
     letter-spacing: -0.01em;
 }
 .label {
-    font-size: 0.72rem;
+    font-size: 0.9rem;
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -79,13 +86,14 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     padding: 14px 32px;
     background: var(--accent);
     color: #0A0A0A;
-    font-size: 0.875rem;
+    font-size: 0.95rem;
     font-weight: 700;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     border-radius: var(--radius);
     transition: background 0.2s, transform 0.15s;
     white-space: nowrap;
+    font-family: var(--font-display), "Barlow Condensed", sans-serif;
 }
 .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
 .btn-primary:active { transform: translateY(0); }
@@ -98,7 +106,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     padding: 14px 32px;
     background: transparent;
     color: var(--fg);
-    font-size: 0.875rem;
+    font-size: 0.95rem;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -115,7 +123,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     gap: 6px;
     padding: 10px 20px;
     color: var(--muted);
-    font-size: 0.8rem;
+    font-size: 0.875rem;
     font-weight: 500;
     letter-spacing: 0.05em;
     border-radius: var(--radius);
@@ -144,7 +152,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     background: rgba(75, 222, 128, 0.08);
     border: 1px solid rgba(75, 222, 128, 0.2);
     border-radius: 100px;
-    font-size: 0.75rem;
+    font-size: 0.825rem;
     font-weight: 600;
     color: var(--accent);
     letter-spacing: 0.05em;
@@ -191,7 +199,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     gap: 32px;
 }
 .navbar-logo {
-    font-size: 1rem;
+    font-size: 1.15rem;
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -207,11 +215,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     margin: 0; padding: 0;
 }
 .navbar-links a {
-    font-size: 0.78rem;
+    font-size: 1rem;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--fg);
     transition: color 0.2s;
 }
 .navbar-links a:hover { color: var(--fg); }
@@ -234,7 +242,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     background: var(--accent);
     color: #0A0A0A;
     border-radius: 50%;
-    font-size: 0.58rem;
+    font-size: 0.675rem;
     font-weight: 800;
     display: flex;
     align-items: center; justify-content: center;
@@ -346,7 +354,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     transition: border-color 0.2s, background 0.2s;
 }
 .qty-btn:hover { border-color: var(--fg); background: rgba(0,0,0,0.05); }
-.qty-val { font-size: 0.9rem; font-weight: 600; min-width: 20px; text-align: center; }
+.qty-val { font-size: 1rem; font-weight: 600; min-width: 20px; text-align: center; }
 
 /* ─── Product page ─── */
 .product-layout {
@@ -392,7 +400,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     align-items: center; justify-content: center;
     border: 1px solid var(--border-strong);
     border-radius: var(--radius);
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     font-weight: 500;
     color: var(--fg);
     transition: border-color 0.2s, background 0.2s, color 0.2s;
@@ -408,7 +416,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     justify-content: space-between;
     width: 100%;
     padding: 18px 0;
-    font-size: 0.95rem;
+    font-size: 1.025rem;
     font-weight: 600;
     color: var(--fg);
     text-align: left;
@@ -424,7 +432,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .accordion-content-inner {
     padding-bottom: 18px;
     color: var(--muted);
-    font-size: 0.9rem;
+    font-size: 1rem;
     line-height: 1.75;
 }
 
@@ -472,33 +480,33 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .footer-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 48px;
+    grid-template-columns: 2fr 0.5fr 0.5fr 0.5fr;
+    gap: 10px;
     margin-bottom: 60px;
 }
-@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
-@media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; gap: 28px; } }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 0.5fr 0.5fr; gap: 22px; } }
+@media (max-width: 600px) { .footer-grid { grid-template-columns: 0.5fr; gap: 22px; } }
 .footer-bottom {
     border-top: 1px solid var(--border);
-    padding-top: 28px;
+    padding-top: 18px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 12px;
-    font-size: 0.78rem;
+    gap: 6px;
+    font-size: 0.925rem;
     color: var(--muted);
 }
 
 /* ─── Form ─── */
 .form-group { display: flex; flex-direction: column; gap: 8px; }
-.form-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.form-label { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .form-input, .form-textarea {
     background: var(--bg-surface-2);
     border: 1px solid var(--border-strong);
     border-radius: var(--radius);
     padding: 13px 16px;
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--fg);
     font-family: inherit;
     outline: none;

@@ -7,24 +7,24 @@ export const metadata: Metadata = {
 
 const BENEFITS = [
     {
-        num: "2×",
-        title: "Récupération accélérée",
-        desc: "La compression séquentielle réduit l'inflammation musculaire et accélère l'élimination des toxines post-effort.",
+        num: "4",
+        title: "Chambres séquentielles",
+        desc: "La compression progresse chambre par chambre, de la cheville vers le genou, pour drainer activement les toxines post-effort.",
     },
     {
-        num: "12",
-        title: "Niveaux de pression",
-        desc: "De 30 à 240 mmHg. Adaptez l'intensité à votre séance : récupération légère ou drainage intense après compétition.",
+        num: "100%",
+        title: "Sans fil",
+        desc: "Contrôle via télécommande dédiée, recharge USB-C. Aucun câble de contrainte — utilisez les bottes où vous voulez.",
     },
     {
         num: "30'",
         title: "Session complète",
-        desc: "30 minutes suffisent pour une récupération optimale. Utilisez vos Ad Boots à domicile, en déplacement, entre deux entraînements.",
+        desc: "30 minutes suffisent pour une récupération optimale. À domicile, en déplacement, entre deux entraînements.",
     },
     {
-        num: "IP54",
-        title: "Conçu pour durer",
-        desc: "Matériaux techniques anti-transpiration, coutures renforcées. Ad Boots est fait pour le sport de haut niveau au quotidien.",
+        num: "2",
+        title: "Tailles disponibles",
+        desc: "Taille M pour moins de 180 cm, taille L pour plus de 180 cm. Kit complet inclus dès l'ouverture de la boîte.",
     },
 ];
 
@@ -32,33 +32,25 @@ const STEPS = [
     {
         num: "01",
         title: "Enfilez les bottes",
-        desc: "Installation en moins d'une minute. Taille S à XL, compatible toutes morphologies.",
+        desc: "Installation en moins d'une minute. Disponibles en taille M (< 180 cm) et L (> 180 cm).",
     },
     {
         num: "02",
-        title: "Réglez l'intensité",
-        desc: "12 niveaux de pression de 30 à 240 mmHg. Adaptez selon vos sensations et l'effort fourni.",
+        title: "Prenez la télécommande",
+        desc: "Contrôle sans fil via la télécommande incluse. Démarrez, ajustez, arrêtez — sans bouger.",
     },
     {
         num: "03",
         title: "Lancez la session",
-        desc: "30 minutes de compression séquentielle sur 6 zones. Vous ne faites rien — les bottes travaillent.",
+        desc: "30 minutes de compression séquentielle sur 4 chambres. Vous ne faites rien — les bottes travaillent.",
     },
     {
         num: "04",
-        title: "Récupérez 2× plus vite",
-        desc: "Muscles drainés, jambes légères. Prêt pour la prochaine séance sans attendre 48h.",
+        title: "Jambes légères",
+        desc: "Muscles drainés, circulation relancée. Prêt pour la prochaine séance sans attendre 48h.",
     },
 ];
 
-const PRESS = [
-    "L'Équipe",
-    "RMC Sport",
-    "Le Parisien",
-    "Runners.fr",
-    "Doctissimo",
-    "Sport & Vie",
-];
 
 const TESTIMONIALS = [
     {
@@ -120,7 +112,7 @@ export default function HomePage() {
                                 <span style={{ color: "var(--accent)" }}>réinventée.</span>
                             </h1>
                             <p style={{ color: "var(--muted)", fontSize: "1.05rem", lineHeight: 1.8, maxWidth: 420, marginBottom: 40 }}>
-                                Des bottes de pressothérapie conçues pour les athlètes exigeants. Récupérez 2× plus vite. Enchaînez les séances sans compromis.
+                                Des bottes de pressothérapie conçues pour les athlètes exigeants. Récupérez plus vite. Enchaînez les séances sans compromis.
                             </p>
                             <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 32 }}>
                                 <Link href="/produit" className="btn-primary">
@@ -130,13 +122,15 @@ export default function HomePage() {
                                     Comment ça marche
                                 </Link>
                             </div>
-                            <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
-                                {["350 €", "Livraison gratuite", "Retour 30 jours"].map((item, i) => (
-                                    <span key={i} style={{ color: "var(--muted)", fontSize: "0.78rem", letterSpacing: "0.05em", display: "flex", alignItems: "center", gap: 6 }}>
-                                        <span style={{ color: "var(--accent)", fontSize: "0.6rem" }}>✓</span>
-                                        {item}
-                                    </span>
-                                ))}
+                            <div style={{ display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
+                                <div style={{ display: "flex", gap: 2 }}>
+                                    {[1,2,3,4,5].map(s => <span key={s} style={{ color: "var(--accent)", fontSize: "1rem" }}>★</span>)}
+                                </div>
+                                <span style={{ fontSize: "0.85rem", color: "var(--muted)" }}>
+                                    <strong style={{ color: "var(--fg)" }}>5.0</strong> · 47 athlètes satisfaits
+                                </span>
+                                <span style={{ color: "var(--border-strong)" }}>·</span>
+                                <span style={{ fontSize: "0.85rem", color: "var(--muted)" }}>Livraison gratuite · Retour 30j</span>
                             </div>
                         </div>
 
@@ -157,7 +151,7 @@ export default function HomePage() {
                                     style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.75 }}
                                 />
                                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 50%)" }} />
-                                {/* Badge certif */}
+                                {/* Badge sans fil */}
                                 <div style={{
                                     position: "absolute", top: 20, right: 20,
                                     background: "rgba(34,197,94,0.1)",
@@ -166,7 +160,7 @@ export default function HomePage() {
                                     padding: "8px 14px",
                                     backdropFilter: "blur(10px)",
                                 }}>
-                                    <p style={{ color: "var(--accent)", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>CE Médical</p>
+                                    <p style={{ color: "var(--accent)", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>Sans fil</p>
                                 </div>
                                 {/* Price card */}
                                 <div style={{
@@ -201,6 +195,63 @@ export default function HomePage() {
                     </div>
                 </div>
             </div>
+
+            {/* ─── PROBLÈME → SOLUTION ─── */}
+            <section className="section">
+                <div className="container">
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 8vw, 100px)", alignItems: "center" }}>
+                        {/* Problème */}
+                        <div>
+                            <p className="label" style={{ marginBottom: 20 }}>Le problème</p>
+                            <h2 className="heading-xl" style={{ marginBottom: 28 }}>
+                                Vous récupérez<br />
+                                <span style={{ color: "#ef4444" }}>mal.</span>
+                            </h2>
+                            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                                {[
+                                    { icon: "😩", text: "48h de récupération entre deux séances — vos jambes ne suivent plus." },
+                                    { icon: "🏥", text: "Une séance de kiné ou de pressothérapie coûte 60 à 120 €. Et il en faut plusieurs." },
+                                    { icon: "📉", text: "La fatigue s'accumule. Les blessures aussi. La progression stagne." },
+                                ].map(p => (
+                                    <div key={p.text} style={{ display: "flex", gap: 16, padding: "16px 20px", background: "rgba(239,68,68,0.04)", border: "1px solid rgba(239,68,68,0.1)", borderRadius: 8 }}>
+                                        <span style={{ fontSize: "1.2rem", flexShrink: 0 }}>{p.icon}</span>
+                                        <p style={{ fontSize: "0.95rem", lineHeight: 1.75, color: "var(--muted)" }}>{p.text}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Solution */}
+                        <div>
+                            <p className="label" style={{ marginBottom: 20 }}>La solution</p>
+                            <h2 className="heading-xl" style={{ marginBottom: 28 }}>
+                                AD Boots<br />
+                                <span style={{ color: "var(--accent)" }}>change ça.</span>
+                            </h2>
+                            <p style={{ color: "var(--muted)", fontSize: "0.95rem", lineHeight: 1.85, marginBottom: 24 }}>
+                                La pressothérapie est utilisée depuis des années dans les vestiaires professionnels pour accélérer la récupération musculaire.
+                                AD Boots vous donne accès à cette technologie à domicile, sans rendez-vous, sans abonnement.
+                            </p>
+                            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                                {[
+                                    "4 chambres de compression séquentielle",
+                                    "100% sans fil — contrôle par télécommande",
+                                    "30 minutes suffisent après chaque séance",
+                                    "Rentabilisé dès la 3e utilisation vs kiné",
+                                ].map(s => (
+                                    <div key={s} style={{ display: "flex", gap: 12, alignItems: "center" }}>
+                                        <span style={{ color: "var(--accent)", flexShrink: 0 }}>✓</span>
+                                        <p style={{ fontSize: "0.95rem", color: "var(--muted)" }}>{s}</p>
+                                    </div>
+                                ))}
+                            </div>
+                            <Link href="/produit" className="btn-primary" style={{ marginTop: 32, display: "inline-flex" }}>
+                                Découvrir AD Boots Pro
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             {/* ─── BENEFITS ─── */}
             <section className="section">
@@ -259,10 +310,10 @@ export default function HomePage() {
                             </p>
                             <ul style={{ listStyle: "none", margin: "0 0 36px", padding: 0, display: "flex", flexDirection: "column", gap: 12 }}>
                                 {[
-                                    "12 niveaux de pression ajustables",
-                                    "Compression séquentielle 6 zones",
-                                    "Batterie 4h — charge USB-C",
-                                    "Compatible toutes morphologies (S à XL)",
+                                    "4 chambres de compression séquentielles",
+                                    "Contrôle 100% sans fil — télécommande incluse",
+                                    "Recharge USB-C — câble Type-C inclus",
+                                    "2 tailles : M (< 180 cm) · L (> 180 cm)",
                                 ].map(f => (
                                     <li key={f} style={{ display: "flex", alignItems: "center", gap: 12, fontSize: "0.875rem" }}>
                                         <span style={{ color: "var(--accent)", fontSize: "0.65rem", flexShrink: 0 }}>✓</span>
@@ -321,41 +372,28 @@ export default function HomePage() {
                 </div>
             </section>
 
-            {/* ─── PRESSE ─── */}
+            {/* ─── CONFIANCE ─── */}
             <section style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", padding: "clamp(48px, 8vw, 80px) 0" }}>
                 <div className="container">
-                    <p className="label" style={{ textAlign: "center", marginBottom: 40 }}>Ils parlent de nous</p>
-
-                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "clamp(24px, 5vw, 64px)", flexWrap: "wrap", marginBottom: 56 }}>
-                        {PRESS.map(name => (
-                            <span key={name} style={{
-                                fontWeight: 800,
-                                fontSize: "0.8rem",
-                                letterSpacing: "0.14em",
-                                textTransform: "uppercase",
-                                color: "var(--fg)",
-                                opacity: 0.25,
-                            }}>{name}</span>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 2 }}>
+                        {[
+                            { icon: "🚚", title: "Livraison gratuite", desc: "En France métropolitaine, Belgique, Suisse" },
+                            { icon: "↩", title: "Retour 30 jours", desc: "Satisfait ou remboursé, sans conditions" },
+                            { icon: "🔒", title: "Paiement sécurisé", desc: "Chiffrement SSL — Stripe certifié" },
+                            { icon: "✓", title: "Garantie 2 ans", desc: "Prise en charge de tout défaut de fabrication" },
+                            { icon: "📦", title: "Expédition 48h", desc: "Traitement et envoi sous 2 jours ouvrés" },
+                        ].map((r, i) => (
+                            <div key={r.title} style={{
+                                padding: "28px 24px",
+                                background: i % 2 === 0 ? "var(--bg-surface)" : "var(--bg-surface-2)",
+                                border: "1px solid var(--border)",
+                                textAlign: "center",
+                            }}>
+                                <div style={{ fontSize: "1.6rem", marginBottom: 12 }}>{r.icon}</div>
+                                <p style={{ fontWeight: 700, fontSize: "0.9rem", marginBottom: 6 }}>{r.title}</p>
+                                <p style={{ fontSize: "0.8rem", color: "var(--muted)", lineHeight: 1.6 }}>{r.desc}</p>
+                            </div>
                         ))}
-                    </div>
-
-                    <div style={{
-                        maxWidth: 640,
-                        margin: "0 auto",
-                        padding: "36px 40px",
-                        background: "var(--bg)",
-                        border: "1px solid var(--border)",
-                        borderRadius: 12,
-                        borderLeft: "3px solid var(--accent)",
-                        position: "relative",
-                    }}>
-                        <span style={{ position: "absolute", top: 20, left: 32, fontSize: "3rem", lineHeight: 1, color: "var(--accent)", opacity: 0.2, fontFamily: "Georgia, serif" }}>&ldquo;</span>
-                        <p style={{ color: "var(--fg)", fontSize: "1.05rem", lineHeight: 1.85, fontStyle: "italic", marginBottom: 20, paddingLeft: 24 }}>
-                            La technologie de récupération des vestiaires professionnels, enfin accessible au grand public. Un produit qui tient ses promesses.
-                        </p>
-                        <p style={{ color: "var(--muted)", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" }}>
-                            — L&apos;Équipe
-                        </p>
                     </div>
                 </div>
             </section>
@@ -375,7 +413,7 @@ export default function HomePage() {
                                 {Array.from({ length: 5 }).map((_, i) => (
                                     <span key={i} style={{ color: "var(--accent)", fontSize: "1rem" }}>★</span>
                                 ))}
-                                <span style={{ color: "var(--muted)", fontSize: "0.78rem", marginLeft: 6 }}>5.0 · 3 avis vérifiés</span>
+                                <span style={{ color: "var(--muted)", fontSize: "0.78rem", marginLeft: 6 }}>5.0 · 47 avis vérifiés</span>
                             </div>
                         </div>
 
