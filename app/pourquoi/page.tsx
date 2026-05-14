@@ -38,7 +38,7 @@ export default function PourquoiPage() {
             {/* ─── How it works ─── */}
             <section className="section">
                 <div className="container">
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center", marginBottom: 80 }}>
+                    <div className="grid-2" style={{ gap: "clamp(32px, 5vw, 80px)", alignItems: "center", marginBottom: 80 }}>
                         <div>
                             <p className="label" style={{ marginBottom: 16 }}>La Science</p>
                             <h2 className="heading-lg" style={{ marginBottom: 24 }}>
@@ -69,7 +69,7 @@ export default function PourquoiPage() {
                     </div>
 
                     {/* Steps */}
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 2 }}>
+                    <div className="grid-4" style={{ gap: 2 }}>
                         {STEPS.map((s, i) => (
                             <div key={s.num} style={{
                                 padding: "36px 28px",
@@ -89,7 +89,7 @@ export default function PourquoiPage() {
             {/* ─── Stats ─── */}
             <section style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", padding: "60px 0" }}>
                 <div className="container">
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 40, textAlign: "center" }}>
+                    <div className="grid-4" style={{ gap: "clamp(20px, 4vw, 40px)", textAlign: "center" }}>
                         {[
                             { num: "4", label: "Chambres séquentielles" },
                             { num: "2", label: "Tailles disponibles (M / L)" },
@@ -119,7 +119,7 @@ export default function PourquoiPage() {
                         </p>
                     </div>
 
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 2, marginBottom: 60 }}>
+                    <div className="grid-3" style={{ gap: 2, marginBottom: 60 }}>
                         {VALUES.map((v, i) => (
                             <div key={v.title} style={{
                                 padding: "40px 32px",

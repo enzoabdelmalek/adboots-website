@@ -516,3 +516,28 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .form-input::placeholder, .form-textarea::placeholder { color: var(--muted); }
 .form-input:focus, .form-textarea:focus { border-color: var(--accent); }
 .form-textarea { resize: vertical; min-height: 140px; }
+
+/* ─── Responsive grid utilities ─── */
+.grid-2       { display: grid; grid-template-columns: 1fr 1fr; }
+.grid-3       { display: grid; grid-template-columns: repeat(3, 1fr); }
+.grid-4       { display: grid; grid-template-columns: repeat(4, 1fr); }
+.grid-sidebar { display: grid; grid-template-columns: 300px 1fr; }
+
+@media (max-width: 900px) {
+    .grid-3       { grid-template-columns: 1fr; }
+    .grid-sidebar { grid-template-columns: 1fr; }
+    .sticky-col   { position: static !important; }
+    .cmp-featured { transform: none !important; box-shadow: 0 4px 20px rgba(34,197,94,0.12) !important; }
+}
+
+@media (max-width: 768px) {
+    body { font-size: 17px; }
+    .grid-2      { grid-template-columns: 1fr; }
+    .grid-4      { grid-template-columns: 1fr 1fr; }
+    .hero-visual { display: none; }
+    .section     { padding: clamp(48px, 8vw, 80px) 0; }
+}
+
+@media (max-width: 480px) {
+    .grid-4 { grid-template-columns: 1fr; }
+}

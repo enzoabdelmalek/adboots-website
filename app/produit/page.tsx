@@ -380,7 +380,7 @@ export default function ProduitPage() {
                     </div>
                     <button
                         className="btn-primary"
-                        style={{ background: "#0A0A0A", color: "var(--fg)", padding: "16px 36px" }}
+                        style={{ background: "#0A0A0A", color: "#ffffff", padding: "16px 36px" }}
                         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                     >
                         Choisir ma taille

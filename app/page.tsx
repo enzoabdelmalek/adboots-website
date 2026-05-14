@@ -100,7 +100,7 @@ export default function HomePage() {
                 }} />
 
                 <div className="container" style={{ position: "relative", zIndex: 1, width: "100%" }}>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 6vw, 80px)", alignItems: "center" }}>
+                    <div className="grid-2" style={{ gap: "clamp(40px, 6vw, 80px)", alignItems: "center" }}>
 
                         {/* Copy */}
                         <div>
@@ -135,7 +135,7 @@ export default function HomePage() {
                         </div>
 
                         {/* Visual */}
-                        <div>
+                        <div className="hero-visual">
                             <div style={{
                                 aspectRatio: "4/5",
                                 background: "linear-gradient(145deg, var(--bg-surface) 0%, var(--bg-surface-2) 100%)",
@@ -199,7 +199,7 @@ export default function HomePage() {
             {/* ─── PROBLÈME → SOLUTION ─── */}
             <section className="section">
                 <div className="container">
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 8vw, 100px)", alignItems: "center" }}>
+                    <div className="grid-2" style={{ gap: "clamp(40px, 8vw, 100px)", alignItems: "center" }}>
                         {/* Problème */}
                         <div>
                             <p className="label" style={{ marginBottom: 20 }}>Le problème</p>
@@ -265,7 +265,7 @@ export default function HomePage() {
                         </p>
                     </div>
 
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 2 }}>
+                    <div className="grid-2" style={{ gap: 2 }}>
                         {BENEFITS.map((b, i) => (
                             <div key={b.title} style={{
                                 padding: "44px 40px",
@@ -291,7 +291,7 @@ export default function HomePage() {
             {/* ─── PRODUCT SPOTLIGHT ─── */}
             <section style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", padding: "clamp(60px, 10vw, 100px) 0" }}>
                 <div className="container">
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
+                    <div className="grid-2" style={{ gap: "clamp(32px, 5vw, 80px)", alignItems: "center" }}>
                         <div style={{ aspectRatio: "16/10", background: "var(--bg-surface-2)", borderRadius: 10, overflow: "hidden" }}>
                             <img
                                 src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?w=900&q=85"
@@ -341,7 +341,7 @@ export default function HomePage() {
                         </p>
                     </div>
 
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 2 }}>
+                    <div className="grid-4" style={{ gap: 2 }}>
                         {STEPS.map((step, i) => (
                             <div key={step.num} style={{
                                 padding: "40px 32px",
@@ -401,8 +401,8 @@ export default function HomePage() {
             {/* ─── TESTIMONIALS ─── */}
             <section className="section">
                 <div className="container">
-                    <div style={{ display: "grid", gridTemplateColumns: "300px 1fr", gap: 80, alignItems: "start" }}>
-                        <div style={{ position: "sticky", top: "calc(var(--navbar-h) + 40px)" }}>
+                    <div className="grid-sidebar" style={{ gap: "clamp(32px, 6vw, 80px)", alignItems: "start" }}>
+                        <div className="sticky-col" style={{ position: "sticky", top: "calc(var(--navbar-h) + 40px)" }}>
                             <p className="label" style={{ marginBottom: 16 }}>Témoignages</p>
                             <h2 className="heading-lg" style={{ marginBottom: 20 }}>Ce qu&apos;ils<br />disent vraiment.</h2>
                             <div className="divider" />
@@ -452,6 +452,137 @@ export default function HomePage() {
                 </div>
             </section>
 
+            {/* ─── COMPARATIF ─── */}
+            <section style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", padding: "clamp(60px, 10vw, 100px) 0" }}>
+                <div className="container">
+                    <div style={{ textAlign: "center", maxWidth: 560, margin: "0 auto 64px" }}>
+                        <p className="label" style={{ marginBottom: 16 }}>Comparatif</p>
+                        <h2 className="heading-xl">350 € une seule fois.<br /><span style={{ color: "var(--accent)" }}>Ou des centaines par an.</span></h2>
+                        <div className="divider" style={{ margin: "20px auto" }} />
+                        <p style={{ color: "var(--muted)", fontSize: "1rem", lineHeight: 1.8 }}>Calculez vous-même ce que vous payez actuellement pour récupérer.</p>
+                    </div>
+
+                    <div className="grid-3" style={{ gap: "clamp(8px, 2vw, 2px)", maxWidth: 900, margin: "0 auto" }}>
+                        {[
+                            {
+                                label: "Séance kiné / pressothérapie",
+                                price: "60 – 120 €",
+                                sub: "par séance",
+                                annual: "≈ 600 – 1 200 €/an",
+                                color: "#ef4444",
+                                items: ["Rendez-vous obligatoire", "Disponibilité limitée", "Prix qui s'accumule", "Dépendance à un praticien"],
+                                highlight: false,
+                            },
+                            {
+                                label: "AD Boots Pro",
+                                price: "350 €",
+                                sub: "une seule fois",
+                                annual: "Rentabilisé dès la 3e séance",
+                                color: "var(--accent)",
+                                items: ["À domicile, quand vous voulez", "Session 30 min illimitée", "Garantie 2 ans incluse", "Kit complet dès la boîte"],
+                                highlight: true,
+                            },
+                            {
+                                label: "Appareil concurrent",
+                                price: "500 – 1 500 €",
+                                sub: "avec câbles obligatoires",
+                                annual: "Encombrant, souvent inutilisé",
+                                color: "#f59e0b",
+                                items: ["Câbles contraignants", "Installation complexe", "Poids et encombrement", "Prix premium injustifié"],
+                                highlight: false,
+                            },
+                        ].map(col => (
+                            <div key={col.label} className={col.highlight ? "cmp-featured" : undefined} style={{
+                                padding: "40px 32px",
+                                background: col.highlight ? "var(--fg)" : "var(--bg-surface-2)",
+                                border: col.highlight ? "2px solid var(--accent)" : "1px solid var(--border)",
+                                borderRadius: 10,
+                                position: "relative",
+                                transform: col.highlight ? "translateY(-8px)" : undefined,
+                                boxShadow: col.highlight ? "0 24px 60px rgba(34,197,94,0.15)" : undefined,
+                            }}>
+                                {col.highlight && (
+                                    <div style={{ position: "absolute", top: -16, left: "50%", transform: "translateX(-50%)", background: "var(--accent)", color: "#000", padding: "4px 16px", borderRadius: 100, fontSize: "0.7rem", fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", whiteSpace: "nowrap" }}>
+                                        Meilleur choix
+                                    </div>
+                                )}
+                                <p style={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: col.highlight ? "rgba(255,255,255,0.5)" : "var(--muted)", marginBottom: 12 }}>{col.label}</p>
+                                <p style={{ fontSize: "clamp(1.6rem, 3vw, 2.2rem)", fontWeight: 800, color: col.highlight ? "#fff" : col.color, lineHeight: 1, marginBottom: 4 }}>{col.price}</p>
+                                <p style={{ fontSize: "0.8rem", color: col.highlight ? "rgba(255,255,255,0.45)" : "var(--muted)", marginBottom: 20 }}>{col.sub}</p>
+                                <div style={{ padding: "10px 14px", background: col.highlight ? "rgba(34,197,94,0.15)" : "rgba(0,0,0,0.04)", borderRadius: 6, marginBottom: 24 }}>
+                                    <p style={{ fontSize: "0.78rem", fontWeight: 600, color: col.highlight ? "var(--accent)" : col.color }}>{col.annual}</p>
+                                </div>
+                                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 10 }}>
+                                    {col.items.map(item => (
+                                        <li key={item} style={{ display: "flex", gap: 10, alignItems: "flex-start", fontSize: "0.85rem", color: col.highlight ? "rgba(255,255,255,0.75)" : "var(--muted)" }}>
+                                            <span style={{ color: col.highlight ? "var(--accent)" : col.color, flexShrink: 0 }}>{col.highlight ? "✓" : "×"}</span>
+                                            {item}
+                                        </li>
+                                    ))}
+                                </ul>
+                                {col.highlight && (
+                                    <Link href="/produit" className="btn-primary" style={{ marginTop: 32, display: "flex", justifyContent: "center", width: "100%" }}>
+                                        Commander
+                                    </Link>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ─── FAQ ─── */}
+            <section className="section">
+                <div className="container">
+                    <div className="grid-sidebar" style={{ gap: "clamp(32px, 6vw, 80px)", alignItems: "start" }}>
+                        <div className="sticky-col" style={{ position: "sticky", top: "calc(var(--navbar-h) + 40px)" }}>
+                            <p className="label" style={{ marginBottom: 16 }}>FAQ</p>
+                            <h2 className="heading-lg" style={{ marginBottom: 20 }}>Vos questions,<br />nos réponses.</h2>
+                            <div className="divider" />
+                            <p style={{ color: "var(--muted)", fontSize: "0.875rem", lineHeight: 1.75, marginBottom: 28 }}>
+                                Une question qui bloque ? Écrivez-nous à contact@ad-boots.com.
+                            </p>
+                        </div>
+
+                        <div style={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                            {[
+                                {
+                                    q: "Est-ce que ça marche vraiment ?",
+                                    a: "La pressothérapie séquentielle est utilisée dans les clubs professionnels depuis plus de 20 ans. Elle agit sur la circulation lymphatique et veineuse pour accélérer l'élimination des toxines post-effort. Les AD Boots reproduisent ce protocole avec 4 chambres progressives — le même principe que les appareils utilisés en kinésithérapie."
+                                },
+                                {
+                                    q: "Pour quel niveau sportif ?",
+                                    a: "AD Boots s'adresse à tous ceux qui s'entraînent régulièrement et qui souffrent de jambes lourdes, de temps de récupération longs, ou qui enchaînent des séances à haute intensité. Amateur ou compétiteur — si vous vous entraînez plus de 3 fois par semaine, vous en ressentez l'effet."
+                                },
+                                {
+                                    q: "Et si ça ne me convient pas ?",
+                                    a: "Vous disposez de 30 jours pour tester. Si les bottes ne vous conviennent pas pour quelque raison que ce soit, renvoyez-les dans leur emballage d'origine et nous vous remboursons intégralement. Sans questions. La prise de risque est nulle."
+                                },
+                                {
+                                    q: "La télécommande est-elle vraiment sans fil ?",
+                                    a: "Oui, complètement. La télécommande est incluse dans le kit et fonctionne par liaison sans fil. Vous contrôlez la session (démarrage, arrêt, intensité) sans aucun câble reliant la télécommande aux bottes. Les bottes se rechargent en USB-C entre les sessions."
+                                },
+                                {
+                                    q: "Comment choisir entre la taille M et L ?",
+                                    a: "La taille M est conçue pour les personnes mesurant moins de 180 cm, et la taille L pour celles mesurant plus de 180 cm. Les manchons couvrent l'ensemble du mollet et du genou. En cas de doute, la taille L offre plus de liberté. Toutes les tailles fonctionnent avec le même protocole 4 chambres."
+                                },
+                            ].map((faq, i) => (
+                                <details key={i} style={{ borderTop: "1px solid var(--border)" }}>
+                                    <summary style={{ padding: "24px 0", cursor: "pointer", fontWeight: 700, fontSize: "1rem", listStyle: "none", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16 }}>
+                                        {faq.q}
+                                        <span style={{ color: "var(--accent)", fontSize: "1.2rem", flexShrink: 0, fontWeight: 300 }}>+</span>
+                                    </summary>
+                                    <div style={{ padding: "0 0 24px", color: "var(--muted)", fontSize: "0.9rem", lineHeight: 1.85 }}>
+                                        {faq.a}
+                                    </div>
+                                </details>
+                            ))}
+                            <div style={{ borderTop: "1px solid var(--border)" }} />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* ─── MISSION ─── */}
             <section className="section" style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--border)" }}>
                 <div className="container">
@@ -473,27 +604,47 @@ export default function HomePage() {
             </section>
 
             {/* ─── FINAL CTA ─── */}
-            <section style={{ background: "var(--accent)", padding: "clamp(60px, 10vw, 100px) 0" }}>
+            <section style={{ background: "var(--fg)", padding: "clamp(60px, 10vw, 100px) 0" }}>
                 <div className="container" style={{ textAlign: "center" }}>
-                    <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(0,0,0,0.4)", marginBottom: 20 }}>
-                        Disponible maintenant
-                    </p>
-                    <h2 style={{ fontSize: "clamp(2rem, 5vw, 4rem)", fontWeight: 800, letterSpacing: "-0.03em", color: "#0A0A0A", marginBottom: 20, lineHeight: 1.05 }}>
-                        Prêt à récupérer<br />comme un pro ?
+                    <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 16px", background: "rgba(34,197,94,0.15)", border: "1px solid rgba(34,197,94,0.3)", borderRadius: 100, marginBottom: 28 }}>
+                        <span style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--accent)", display: "inline-block" }} />
+                        <span style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--accent)" }}>Stock limité — quelques unités disponibles</span>
+                    </div>
+                    <h2 style={{ fontSize: "clamp(2rem, 5vw, 4rem)", fontWeight: 800, letterSpacing: "-0.03em", color: "#fff", marginBottom: 20, lineHeight: 1.05 }}>
+                        Votre récupération<br />commence maintenant.
                     </h2>
-                    <p style={{ color: "rgba(0,0,0,0.5)", fontSize: "1rem", maxWidth: 400, margin: "0 auto 40px" }}>
-                        350 € · Livraison gratuite · Retour 30 jours · Garantie 2 ans
+                    <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "1rem", maxWidth: 440, margin: "0 auto 40px", lineHeight: 1.8 }}>
+                        AD Boots Pro · 350 € · Paiement sécurisé par Stripe<br />
+                        Livraison gratuite · Retour 30 jours · Garantie 2 ans
                     </p>
-                    <Link href="/produit" style={{
-                        display: "inline-flex", alignItems: "center", gap: 10,
-                        padding: "16px 40px",
-                        background: "#0A0A0A", color: "#fff",
-                        fontWeight: 700, fontSize: "0.875rem",
-                        letterSpacing: "0.08em", textTransform: "uppercase",
-                        borderRadius: "var(--radius)",
-                    }}>
-                        Commander les Ad Boots
-                    </Link>
+                    <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap", marginBottom: 28 }}>
+                        <Link href="/produit" style={{
+                            display: "inline-flex", alignItems: "center", gap: 10,
+                            padding: "18px 44px",
+                            background: "var(--accent)", color: "#000",
+                            fontWeight: 800, fontSize: "0.95rem",
+                            letterSpacing: "0.06em", textTransform: "uppercase",
+                            borderRadius: "var(--radius)",
+                        }}>
+                            Commander — 350 €
+                        </Link>
+                        <Link href="/pourquoi" style={{
+                            display: "inline-flex", alignItems: "center", gap: 10,
+                            padding: "18px 32px",
+                            background: "transparent", color: "rgba(255,255,255,0.6)",
+                            fontWeight: 600, fontSize: "0.875rem",
+                            letterSpacing: "0.06em", textTransform: "uppercase",
+                            borderRadius: "var(--radius)",
+                            border: "1px solid rgba(255,255,255,0.15)",
+                        }}>
+                            En savoir plus
+                        </Link>
+                    </div>
+                    <div style={{ display: "flex", gap: 28, justifyContent: "center", flexWrap: "wrap" }}>
+                        {["🔒 Paiement sécurisé", "🚚 Livraison offerte", "↩ Retour 30j"].map(item => (
+                            <span key={item} style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.35)", fontWeight: 500 }}>{item}</span>
+                        ))}
+                    </div>
                 </div>
             </section>
         </>
