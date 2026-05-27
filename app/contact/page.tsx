@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import type { Metadata } from "next";
 import Link from "next/link";
+import { IconMail, IconClock, IconPackage } from "@/app/components/Icons";
 
 const FAQ = [
     { q: "Quel est le délai de livraison ?", a: "Livraison sous 2 à 4 jours ouvrés en France métropolitaine. Livraison express disponible en 24h pour un supplément de 9,90 €." },
@@ -14,10 +14,32 @@ const FAQ = [
 export default function ContactPage() {
     const [openFaq, setOpenFaq] = useState<number | null>(null);
     const [sent, setSent] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const [prenom, setPrenom] = useState("");
+    const [nom, setNom] = useState("");
+    const [email, setEmail] = useState("");
+    const [sujet, setSujet] = useState("");
+    const [message, setMessage] = useState("");
+
+    const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setSent(true);
+        setLoading(true);
+        setError(null);
+        try {
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ prenom, nom, email, sujet, message }),
+            });
+            if (!res.ok) throw new Error();
+            setSent(true);
+        } catch {
+            setError("Une erreur est survenue. Réessayez ou écrivez-nous directement à contact@adboots.fr.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -26,10 +48,10 @@ export default function ContactPage() {
             <section style={{ background: "var(--bg-surface)", borderBottom: "1px solid var(--border)", padding: "clamp(60px, 10vw, 100px) 0" }}>
                 <div className="container">
                     <div style={{ maxWidth: 480 }}>
-                        <p className="label" style={{ marginBottom: 20 }}>Contact</p>
-                        <h1 className="heading-xl" style={{ marginBottom: 24 }}>On est là.</h1>
-                        <div className="divider" />
-                        <p style={{ color: "var(--muted)", fontSize: "1rem", lineHeight: 1.8 }}>
+                        <p className="label anim-1" style={{ marginBottom: 20 }}>Contact</p>
+                        <h1 className="heading-xl anim-2" style={{ marginBottom: 24 }}>On est là.</h1>
+                        <div className="divider divider-animated" />
+                        <p className="anim-3" style={{ color: "var(--muted)", fontSize: "1rem", lineHeight: 1.8 }}>
                             Une question sur le produit, une commande en cours, un problème technique ? On répond sous 24h.
                         </p>
                     </div>
@@ -39,37 +61,37 @@ export default function ContactPage() {
             {/* Content */}
             <section className="section">
                 <div className="container">
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "start" }}>
+                    <div className="grid-2" style={{ gap: "clamp(40px, 6vw, 80px)", alignItems: "start" }}>
 
                         {/* Form */}
-                        <div>
+                        <div data-sr="left">
                             <p className="label" style={{ marginBottom: 28 }}>Envoyer un message</p>
 
                             {sent ? (
-                                <div style={{ padding: 36, background: "rgba(75,222,128,0.06)", border: "1px solid rgba(75,222,128,0.2)", borderRadius: 8, textAlign: "center" }}>
+                                <div style={{ padding: 36, background: "rgba(41,184,99,0.06)", border: "1px solid rgba(41,184,99,0.2)", borderRadius: 8, textAlign: "center" }}>
                                     <p style={{ color: "var(--accent)", fontSize: "1.5rem", marginBottom: 12 }}>✓</p>
                                     <p style={{ fontWeight: 700, fontSize: "1rem", marginBottom: 8 }}>Message envoyé !</p>
                                     <p style={{ color: "var(--muted)", fontSize: "0.875rem" }}>Nous vous répondons sous 24h (hors week-end).</p>
                                 </div>
                             ) : (
                                 <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-                                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+                                    <div className="grid-2" style={{ gap: 16 }}>
                                         <div className="form-group">
-                                            <label className="form-label">Prénom</label>
-                                            <input type="text" className="form-input" placeholder="Théo" required />
+                                            <label htmlFor="contact-prenom" className="form-label">Prénom</label>
+                                            <input id="contact-prenom" type="text" className="form-input" placeholder="Théo" required value={prenom} onChange={e => setPrenom(e.target.value)} />
                                         </div>
                                         <div className="form-group">
-                                            <label className="form-label">Nom</label>
-                                            <input type="text" className="form-input" placeholder="Martin" required />
+                                            <label htmlFor="contact-nom" className="form-label">Nom</label>
+                                            <input id="contact-nom" type="text" className="form-input" placeholder="Martin" required value={nom} onChange={e => setNom(e.target.value)} />
                                         </div>
                                     </div>
                                     <div className="form-group">
-                                        <label className="form-label">Email</label>
-                                        <input type="email" className="form-input" placeholder="theo@exemple.fr" required />
+                                        <label htmlFor="contact-email" className="form-label">Email</label>
+                                        <input id="contact-email" type="email" className="form-input" placeholder="theo@exemple.fr" required value={email} onChange={e => setEmail(e.target.value)} />
                                     </div>
                                     <div className="form-group">
-                                        <label className="form-label">Sujet</label>
-                                        <select className="form-input" style={{ appearance: "none", cursor: "pointer" }}>
+                                        <label htmlFor="contact-sujet" className="form-label">Sujet</label>
+                                        <select id="contact-sujet" className="form-input" style={{ appearance: "none", cursor: "pointer" }} value={sujet} onChange={e => setSujet(e.target.value)}>
                                             <option value="">Sélectionner un sujet</option>
                                             <option>Question sur le produit</option>
                                             <option>Suivi de commande</option>
@@ -80,26 +102,29 @@ export default function ContactPage() {
                                         </select>
                                     </div>
                                     <div className="form-group">
-                                        <label className="form-label">Message</label>
-                                        <textarea className="form-textarea" placeholder="Décrivez votre demande..." required />
+                                        <label htmlFor="contact-message" className="form-label">Message</label>
+                                        <textarea id="contact-message" className="form-textarea" placeholder="Décrivez votre demande..." required value={message} onChange={e => setMessage(e.target.value)} />
                                     </div>
-                                    <button type="submit" className="btn-primary" style={{ alignSelf: "flex-start" }}>
-                                        Envoyer le message
+                                    {error && (
+                                        <p style={{ fontSize: "0.83rem", color: "#f87171" }}>{error}</p>
+                                    )}
+                                    <button type="submit" className="btn-primary" style={{ alignSelf: "flex-start" }} disabled={loading}>
+                                        {loading ? "Envoi en cours…" : "Envoyer le message"}
                                     </button>
                                 </form>
                             )}
                         </div>
 
                         {/* Info + FAQ */}
-                        <div>
+                        <div data-sr="right">
                             {/* Contact info */}
                             <div style={{ marginBottom: 48 }}>
                                 <p className="label" style={{ marginBottom: 24 }}>Informations</p>
                                 <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
                                     {[
-                                        { icon: "✉", label: "Email", val: "contact@adboots.fr" },
-                                        { icon: "⏱", label: "Réponse", val: "Sous 24h, lun – ven" },
-                                        { icon: "📦", label: "SAV / Retours", val: "sav@adboots.fr" },
+                                        { Icon: IconMail,    label: "Email",        val: "contact@adboots.fr" },
+                                        { Icon: IconClock,   label: "Réponse",      val: "Sous 24h ouvrées" },
+                                        { Icon: IconPackage, label: "SAV / Retours", val: "contact@adboots.fr" },
                                     ].map(i => (
                                         <div key={i.label} style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
                                             <div style={{
@@ -108,9 +133,8 @@ export default function ContactPage() {
                                                 border: "1px solid var(--border)",
                                                 borderRadius: "var(--radius)",
                                                 display: "flex", alignItems: "center", justifyContent: "center",
-                                                fontSize: "1rem",
                                             }}>
-                                                {i.icon}
+                                                <i.Icon size={16} color="var(--accent)" />
                                             </div>
                                             <div>
                                                 <p className="label" style={{ marginBottom: 4 }}>{i.label}</p>

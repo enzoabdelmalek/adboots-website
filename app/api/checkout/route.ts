@@ -50,13 +50,12 @@ export async function POST(req: NextRequest) {
         // Créer la session Stripe Checkout
         const session = await stripe.checkout.sessions.create({
             mode: "payment",
-            payment_method_types: ["card"],
+            payment_method_types: ["card", "paypal"],
             line_items: items.map(item => ({
                 price_data: {
                     currency: "eur",
                     product_data: {
                         name: `${item.name} — Taille ${item.size}`,
-                        ...(item.image ? { images: [item.image] } : {}),
                     },
                     unit_amount: Math.round(item.price * 100),
                 },
@@ -82,7 +81,8 @@ export async function POST(req: NextRequest) {
 
         return NextResponse.json({ url: session.url });
     } catch (err) {
-        console.error("Erreur checkout:", err);
-        return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
+        const message = err instanceof Error ? err.message : String(err);
+        console.error("Erreur checkout:", message);
+        return NextResponse.json({ error: "Erreur serveur", detail: message }, { status: 500 });
     }
 }

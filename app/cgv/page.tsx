@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Conditions Générales de Vente — AD Boots" };
+export const metadata: Metadata = {
+    title: "Conditions Générales de Vente — AD Boots",
+    description: "Conditions générales de vente AD Boots : prix, livraison, droit de rétractation 30 jours, garantie 2 ans et service client.",
+};
 
 const SECTION = ({ title, children }: { title: string; children: React.ReactNode }) => (
     <div style={{ marginBottom: 48 }}>
@@ -86,7 +89,7 @@ export default function CGVPage() {
                             de la réception du produit pour exercer son droit de rétractation, sans avoir à justifier de motifs.
                         </p>
                         <p style={{ marginTop: 12 }}>
-                            Pour exercer ce droit, le Client doit contacter AD Boots à l'adresse contact@ad-boots.com.
+                            Pour exercer ce droit, le Client doit contacter AD Boots à l'adresse contact@adboots.fr.
                             Le produit doit être retourné dans son emballage d'origine, en parfait état.
                             Les frais de retour sont à la charge du Client sauf défaut constaté à la réception.
                         </p>
@@ -116,7 +119,7 @@ export default function CGVPage() {
 
                     <SECTION title="10. Service client">
                         <p>
-                            Pour toute question relative à une commande : contact@ad-boots.com<br />
+                            Pour toute question relative à une commande : contact@adboots.fr<br />
                             Délai de réponse : sous 24h, du lundi au vendredi.
                         </p>
                     </SECTION>

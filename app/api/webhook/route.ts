@@ -53,7 +53,6 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "Erreur DB" }, { status: 500 });
         }
 
-        console.log(`✅ Commande ${orderId} confirmée — ${customerName}`);
     }
 
     return NextResponse.json({ received: true });

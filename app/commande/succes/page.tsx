@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useCart } from "@/app/context/CartContext";
+import { IconPackage, IconMail, IconReturn } from "@/app/components/Icons";
 import Link from "next/link";
 
 export default function SuccessPage() {
@@ -19,7 +20,7 @@ export default function SuccessPage() {
                 {/* Icône succès */}
                 <div style={{
                     width: 80, height: 80, borderRadius: "50%",
-                    background: "rgba(34,197,94,0.1)", border: "2px solid rgba(34,197,94,0.3)",
+                    background: "rgba(61,220,132,0.1)", border: "2px solid rgba(61,220,132,0.3)",
                     display: "flex", alignItems: "center", justifyContent: "center",
                     margin: "0 auto 32px",
                 }}>
@@ -40,12 +41,12 @@ export default function SuccessPage() {
                     border: "1px solid var(--border)", borderRadius: 8, marginBottom: 36, textAlign: "left",
                 }}>
                     {[
-                        { icon: "📦", text: "Expédition sous 48h ouvrées" },
-                        { icon: "📧", text: "Email de confirmation envoyé" },
-                        { icon: "↩", text: "Retour possible sous 30 jours" },
+                        { Icon: IconPackage, text: "Expédition sous 48h ouvrées" },
+                        { Icon: IconMail,    text: "Email de confirmation envoyé" },
+                        { Icon: IconReturn,  text: "Retour possible sous 30 jours" },
                     ].map(r => (
                         <div key={r.text} style={{ display: "flex", gap: 12, alignItems: "center", fontSize: "0.88rem", color: "var(--muted)" }}>
-                            <span>{r.icon}</span>
+                            <r.Icon size={15} color="var(--accent)" />
                             {r.text}
                         </div>
                     ))}

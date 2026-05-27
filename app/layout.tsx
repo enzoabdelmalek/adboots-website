@@ -1,22 +1,27 @@
 import type { Metadata } from "next";
-import { Barlow, Barlow_Condensed } from "next/font/google";
+import { Geist, Geist_Mono, Archivo } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/app/context/CartContext";
 import Navbar from "@/app/components/Navbar";
 import Cart from "@/app/components/Cart";
 import Footer from "@/app/components/Footer";
+import ScrollReveal from "@/app/components/ScrollReveal";
 import Script from "next/script";
 
-const barlow = Barlow({
+const geist = Geist({
     variable: "--font-sans",
     subsets: ["latin"],
-    weight: ["400", "500", "600", "700"],
 });
 
-const barlowCondensed = Barlow_Condensed({
+const geistMono = Geist_Mono({
+    variable: "--font-mono",
+    subsets: ["latin"],
+});
+
+const archivo = Archivo({
     variable: "--font-display",
     subsets: ["latin"],
-    weight: ["600", "700", "800"],
+    weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -26,12 +31,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="fr" className={`${barlow.variable} ${barlowCondensed.variable}`}>
+        <html lang="fr" className={`${geist.variable} ${geistMono.variable} ${archivo.variable}`}>
             <head>
+                {/* Prevent flash of wrong theme */}
+                <script dangerouslySetInnerHTML={{ __html: `(function(){try{if(localStorage.getItem('ad-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}})()` }} />
                 <Script src="https://tracker-production-9a75.up.railway.app/track.js?id=f9e291c2-0fea-4b24-8abb-57264e001cd3" strategy="afterInteractive" />
             </head>
             <body>
                 <CartProvider>
+                    <ScrollReveal />
                     <Navbar />
                     <Cart />
                     <main style={{ paddingTop: "var(--navbar-h)" }}>

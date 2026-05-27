@@ -128,11 +128,6 @@ export default function Cart() {
                             <span style={{ fontSize: "1.2rem", fontWeight: 700 }}>{totalPrice} €</span>
                         </div>
 
-                        {/* Fractional payment hint */}
-                        <p style={{ fontSize: "0.78rem", color: "var(--muted)", marginBottom: 16, textAlign: "center" }}>
-                            ou <strong style={{ color: "var(--fg)" }}>{(totalPrice / 4).toFixed(0)} €/mois</strong> en 4× sans frais
-                        </p>
-
                         {checkoutError && (
                             <p style={{ fontSize: "0.78rem", color: "#ef4444", textAlign: "center", marginBottom: 10 }}>{checkoutError}</p>
                         )}

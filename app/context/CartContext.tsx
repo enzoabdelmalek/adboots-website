@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 export interface CartItem {
     id: string;
@@ -26,9 +26,33 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | null>(null);
 
+const STORAGE_KEY = "ad-cart";
+
+function readStorage(): CartItem[] {
+    try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+    } catch {
+        return [];
+    }
+}
+
 export function CartProvider({ children }: { children: ReactNode }) {
     const [items, setItems] = useState<CartItem[]>([]);
     const [isOpen, setIsOpen] = useState(false);
+    const [hydrated, setHydrated] = useState(false);
+
+    // Load from localStorage once on mount
+    useEffect(() => {
+        setItems(readStorage());
+        setHydrated(true);
+    }, []);
+
+    // Persist to localStorage whenever items change (after hydration)
+    useEffect(() => {
+        if (!hydrated) return;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    }, [items, hydrated]);
 
     const openCart  = () => { setIsOpen(true);  document.body.style.overflow = "hidden"; };
     const closeCart = () => { setIsOpen(false); document.body.style.overflow = ""; };

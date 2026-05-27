@@ -1,8 +1,14 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import {
+    IconTruck, IconReturn, IconCreditCard, IconLock, IconShield, IconZap,
+    IconClock, IconEuro, IconTrendingDown, IconPackage,
+    IconCheck, IconX, IconStar, IconSparkle,
+} from "@/app/components/Icons";
 
 export const metadata: Metadata = {
     title: "Ad Boots — Récupération Sportive par Pressothérapie",
+    description: "Bottes de pressothérapie sans fil à 4 chambres séquentielles. Récupérez 2× plus vite après l'effort. Livraison gratuite, retour 30 jours, garantie 2 ans. 350 €.",
 };
 
 const BENEFITS = [
@@ -74,12 +80,12 @@ const TESTIMONIALS = [
 ];
 
 const REASSURANCE = [
-    { icon: "🚚", label: "Livraison gratuite" },
-    { icon: "↩", label: "Retour 30 jours" },
-    { icon: "✦", label: "Paiement 4× sans frais" },
-    { icon: "🔒", label: "Paiement sécurisé" },
-    { icon: "✓", label: "Garantie 2 ans" },
-    { icon: "⚡", label: "Expédition sous 48h" },
+    { Icon: IconTruck,      label: "Livraison gratuite" },
+    { Icon: IconReturn,     label: "Retour 30 jours" },
+    { Icon: IconCreditCard, label: "Paiement sécurisé" },
+    { Icon: IconLock,       label: "Paiement sécurisé" },
+    { Icon: IconShield,     label: "Garantie 2 ans" },
+    { Icon: IconZap,        label: "Expédition sous 48h" },
 ];
 
 export default function HomePage() {
@@ -93,91 +99,74 @@ export default function HomePage() {
                 position: "relative",
                 overflow: "hidden",
             }}>
+                {/* Full-bleed background image */}
+                <img
+                    src="/assets/df57e7dc-86ae-48d9-9d4a-6f093281baa1.JPG"
+                    alt=""
+                    aria-hidden="true"
+                    style={{
+                        position: "absolute", inset: 0,
+                        width: "100%", height: "100%",
+                        objectFit: "cover", objectPosition: "center 30%",
+                    }}
+                />
+                {/* Gradient overlay — dark left for text, fades right */}
                 <div style={{
                     position: "absolute", inset: 0,
-                    background: "radial-gradient(ellipse 70% 60% at 70% 50%, rgba(34,197,94,0.06) 0%, transparent 65%)",
+                    background: "linear-gradient(105deg, rgba(8,8,8,0.82) 0%, rgba(8,8,8,0.55) 50%, rgba(8,8,8,0.25) 100%)",
+                }} />
+                {/* Subtle green glow */}
+                <div style={{
+                    position: "absolute", inset: 0,
+                    background: "radial-gradient(ellipse 50% 60% at 15% 80%, rgba(61,220,132,0.08) 0%, transparent 60%)",
                     pointerEvents: "none",
                 }} />
 
                 <div className="container" style={{ position: "relative", zIndex: 1, width: "100%" }}>
-                    <div className="grid-2" style={{ gap: "clamp(40px, 6vw, 80px)", alignItems: "center" }}>
-
-                        {/* Copy */}
-                        <div>
-                            <div className="tag" style={{ marginBottom: 28 }}>
-                                ✦ Pressothérapie · Récupération sportive
-                            </div>
-                            <h1 className="display" style={{ marginBottom: 28 }}>
-                                La récupération,<br />
-                                <span style={{ color: "var(--accent)" }}>réinventée.</span>
-                            </h1>
-                            <p style={{ color: "var(--muted)", fontSize: "1.05rem", lineHeight: 1.8, maxWidth: 420, marginBottom: 40 }}>
-                                Des bottes de pressothérapie conçues pour les athlètes exigeants. Récupérez plus vite. Enchaînez les séances sans compromis.
-                            </p>
-                            <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 32 }}>
-                                <Link href="/produit" className="btn-primary">
-                                    Découvrir les bottes
-                                </Link>
-                                <Link href="/pourquoi" className="btn-outline">
-                                    Comment ça marche
-                                </Link>
-                            </div>
-                            <div style={{ display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
-                                <div style={{ display: "flex", gap: 2 }}>
-                                    {[1,2,3,4,5].map(s => <span key={s} style={{ color: "var(--accent)", fontSize: "1rem" }}>★</span>)}
-                                </div>
-                                <span style={{ fontSize: "0.85rem", color: "var(--muted)" }}>
-                                    <strong style={{ color: "var(--fg)" }}>5.0</strong> · 47 athlètes satisfaits
-                                </span>
-                                <span style={{ color: "var(--border-strong)" }}>·</span>
-                                <span style={{ fontSize: "0.85rem", color: "var(--muted)" }}>Livraison gratuite · Retour 30j</span>
-                            </div>
+                    <div style={{ maxWidth: 600 }}>
+                        <p className="label anim-1" style={{ marginBottom: 20, color: "var(--accent)" }}>Pressothérapie sans fil</p>
+                        <h1 className="display anim-2" style={{ marginBottom: 28, color: "#fff" }}>
+                            La récupération,<br />
+                            <span style={{ color: "var(--accent)" }}>réinventée.</span>
+                        </h1>
+                        <p className="anim-3" style={{ color: "rgba(255,255,255,0.7)", fontSize: "1.05rem", lineHeight: 1.8, maxWidth: 440, marginBottom: 40 }}>
+                            Des bottes de pressothérapie conçues pour les athlètes exigeants. Récupérez plus vite. Enchaînez les séances sans compromis.
+                        </p>
+                        <div className="anim-4" style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 36 }}>
+                            <Link href="/produit" className="btn-primary btn-glow">
+                                Découvrir les bottes
+                            </Link>
+                            <Link href="/pourquoi" className="btn-outline" style={{ borderColor: "rgba(255,255,255,0.25)", color: "#fff" }}>
+                                Comment ça marche
+                            </Link>
                         </div>
-
-                        {/* Visual */}
-                        <div className="hero-visual">
-                            <div style={{
-                                aspectRatio: "4/5",
-                                background: "linear-gradient(145deg, var(--bg-surface) 0%, var(--bg-surface-2) 100%)",
-                                borderRadius: 16,
-                                border: "1px solid rgba(34,197,94,0.15)",
-                                overflow: "hidden",
-                                position: "relative",
-                                boxShadow: "0 24px 80px rgba(0,0,0,0.10)",
-                            }}>
-                                <img
-                                    src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=85"
-                                    alt="Ad Boots — récupération sportive"
-                                    style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.75 }}
-                                />
-                                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 50%)" }} />
-                                {/* Badge sans fil */}
-                                <div style={{
-                                    position: "absolute", top: 20, right: 20,
-                                    background: "rgba(34,197,94,0.1)",
-                                    border: "1px solid rgba(34,197,94,0.25)",
-                                    borderRadius: 8,
-                                    padding: "8px 14px",
-                                    backdropFilter: "blur(10px)",
-                                }}>
-                                    <p style={{ color: "var(--accent)", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>Sans fil</p>
-                                </div>
-                                {/* Price card */}
-                                <div style={{
-                                    position: "absolute", bottom: 24, left: 24,
-                                    background: "rgba(0,0,0,0.75)",
-                                    backdropFilter: "blur(20px)",
-                                    border: "1px solid rgba(255,255,255,0.12)",
-                                    borderRadius: 10,
-                                    padding: "16px 22px",
-                                }}>
-                                    <p className="label" style={{ marginBottom: 6, color: "rgba(255,255,255,0.5)" }}>Ad Boots Pro</p>
-                                    <p style={{ color: "#fff", fontWeight: 800, fontSize: "1.6rem", lineHeight: 1 }}>350 €</p>
-                                    <p style={{ color: "var(--accent)", fontSize: "0.75rem", marginTop: 5 }}>ou 4× 87,50 € sans frais</p>
-                                </div>
+                        <div className="anim-5" style={{ display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
+                            <div style={{ display: "flex", gap: 2 }}>
+                                {[1,2,3,4,5].map(s => <IconStar key={s} size={14} color="var(--accent)" />)}
                             </div>
+                            <span style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.6)" }}>
+                                <strong style={{ color: "#fff" }}>5.0</strong> · 47 athlètes satisfaits
+                            </span>
+                            <span style={{ color: "rgba(255,255,255,0.25)" }}>·</span>
+                            <span style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.6)" }}>Livraison gratuite · Retour 30j</span>
                         </div>
                     </div>
+                </div>
+
+                {/* Price badge — anchored to section bottom-right */}
+                <div className="anim-img hero-price-badge" style={{
+                    position: "absolute", bottom: "clamp(24px, 5vw, 48px)", right: "clamp(16px, 5vw, 80px)",
+                    zIndex: 2,
+                    background: "rgba(0,0,0,0.75)",
+                    backdropFilter: "blur(20px)",
+                    border: "1px solid rgba(255,255,255,0.12)",
+                    borderRadius: 10,
+                    padding: "16px 24px",
+                    display: "flex", flexDirection: "column", gap: 4,
+                }}>
+                    <p className="label" style={{ color: "rgba(255,255,255,0.5)", marginBottom: 4 }}>Ad Boots Pro</p>
+                    <p style={{ color: "#fff", fontWeight: 800, fontSize: "1.6rem", lineHeight: 1 }}>350 €</p>
+                    <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.72rem" }}>Livraison offerte</p>
                 </div>
             </section>
 
@@ -187,7 +176,7 @@ export default function HomePage() {
                     <div className="marquee-track">
                         {[...REASSURANCE, ...REASSURANCE, ...REASSURANCE].map((r, i) => (
                             <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, whiteSpace: "nowrap" }}>
-                                <span style={{ color: "var(--accent)" }}>{r.icon}</span>
+                                <r.Icon size={14} color="var(--accent)" />
                                 <span style={{ fontSize: "0.82rem", fontWeight: 500 }}>{r.label}</span>
                                 <span style={{ color: "var(--border-strong)", margin: "0 12px" }}>·</span>
                             </div>
@@ -201,7 +190,7 @@ export default function HomePage() {
                 <div className="container">
                     <div className="grid-2" style={{ gap: "clamp(40px, 8vw, 100px)", alignItems: "center" }}>
                         {/* Problème */}
-                        <div>
+                        <div data-sr="left">
                             <p className="label" style={{ marginBottom: 20 }}>Le problème</p>
                             <h2 className="heading-xl" style={{ marginBottom: 28 }}>
                                 Vous récupérez<br />
@@ -209,12 +198,12 @@ export default function HomePage() {
                             </h2>
                             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                                 {[
-                                    { icon: "😩", text: "48h de récupération entre deux séances — vos jambes ne suivent plus." },
-                                    { icon: "🏥", text: "Une séance de kiné ou de pressothérapie coûte 60 à 120 €. Et il en faut plusieurs." },
-                                    { icon: "📉", text: "La fatigue s'accumule. Les blessures aussi. La progression stagne." },
-                                ].map(p => (
-                                    <div key={p.text} style={{ display: "flex", gap: 16, padding: "16px 20px", background: "rgba(239,68,68,0.04)", border: "1px solid rgba(239,68,68,0.1)", borderRadius: 8 }}>
-                                        <span style={{ fontSize: "1.2rem", flexShrink: 0 }}>{p.icon}</span>
+                                    { Icon: IconClock,        text: "48h de récupération entre deux séances — vos jambes ne suivent plus." },
+                                    { Icon: IconEuro,         text: "Une séance de kiné ou de pressothérapie coûte 60 à 120 €. Et il en faut plusieurs." },
+                                    { Icon: IconTrendingDown, text: "La fatigue s'accumule. Les blessures aussi. La progression stagne." },
+                                ].map((p, i) => (
+                                    <div key={p.text} data-sr data-sr-delay={`${i * 100}`} style={{ display: "flex", gap: 16, padding: "16px 20px", background: "var(--bg-surface)", border: "1px solid var(--border)", borderRadius: 8 }}>
+                                        <p.Icon size={18} color="var(--muted)" style={{ marginTop: 2 }} />
                                         <p style={{ fontSize: "0.95rem", lineHeight: 1.75, color: "var(--muted)" }}>{p.text}</p>
                                     </div>
                                 ))}
@@ -222,7 +211,7 @@ export default function HomePage() {
                         </div>
 
                         {/* Solution */}
-                        <div>
+                        <div data-sr="right">
                             <p className="label" style={{ marginBottom: 20 }}>La solution</p>
                             <h2 className="heading-xl" style={{ marginBottom: 28 }}>
                                 AD Boots<br />
@@ -240,7 +229,7 @@ export default function HomePage() {
                                     "Rentabilisé dès la 3e utilisation vs kiné",
                                 ].map(s => (
                                     <div key={s} style={{ display: "flex", gap: 12, alignItems: "center" }}>
-                                        <span style={{ color: "var(--accent)", flexShrink: 0 }}>✓</span>
+                                        <IconCheck size={14} color="var(--accent)" />
                                         <p style={{ fontSize: "0.95rem", color: "var(--muted)" }}>{s}</p>
                                     </div>
                                 ))}
@@ -256,34 +245,85 @@ export default function HomePage() {
             {/* ─── BENEFITS ─── */}
             <section className="section">
                 <div className="container">
-                    <div style={{ maxWidth: 560, marginBottom: 64 }}>
-                        <p className="label" style={{ marginBottom: 16 }}>Pourquoi Ad Boots</p>
-                        <h2 className="heading-xl">Chaque détail compte.<br />Surtout après l&apos;effort.</h2>
-                        <div className="divider" />
-                        <p style={{ color: "var(--muted)", fontSize: "1rem", lineHeight: 1.8 }}>
-                            La compression séquentielle n&apos;est plus réservée aux salles de kiné. Ad Boots vous apporte cette technologie là où vous en avez besoin, quand vous en avez besoin.
-                        </p>
-                    </div>
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 6vw, 80px)", alignItems: "start" }} className="benefits-layout">
 
-                    <div className="grid-2" style={{ gap: 2 }}>
-                        {BENEFITS.map((b, i) => (
-                            <div key={b.title} style={{
-                                padding: "44px 40px",
-                                background: i % 2 === 0 ? "var(--bg-surface)" : "var(--bg-surface-2)",
-                                borderRadius: i === 0 ? "8px 0 0 0" : i === 1 ? "0 8px 0 0" : i === 2 ? "0 0 0 8px" : "0 0 8px 0",
-                                border: "1px solid var(--border)",
+                        {/* Photo */}
+                        <div data-sr="left" style={{ position: "sticky", top: "calc(var(--navbar-h) + 24px)", borderRadius: 12, overflow: "hidden", aspectRatio: "3/4" }}>
+                            <img
+                                src="/assets/a03294c9-b87b-49cf-925b-949ad5d4ed97.JPG"
+                                alt="Athlète utilisant Ad Boots"
+                                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+                            />
+                            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 55%)" }} />
+                            <div style={{
+                                position: "absolute", bottom: 24, left: 24,
+                                background: "rgba(0,0,0,0.65)",
+                                backdropFilter: "blur(12px)",
+                                border: "1px solid rgba(255,255,255,0.1)",
+                                borderRadius: 8,
+                                padding: "12px 18px",
                             }}>
-                                <p style={{ color: "var(--accent)", fontSize: "clamp(2.5rem, 4vw, 3.5rem)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1, marginBottom: 16 }}>{b.num}</p>
-                                <h3 className="heading-md" style={{ marginBottom: 12 }}>{b.title}</h3>
-                                <p style={{ color: "var(--muted)", fontSize: "0.9rem", lineHeight: 1.75 }}>{b.desc}</p>
+                                <p style={{ color: "var(--accent)", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 4 }}>Récupération</p>
+                                <p style={{ color: "#fff", fontWeight: 700, fontSize: "0.95rem" }}>2× plus rapide</p>
+                            </div>
+                        </div>
+
+                        {/* Content */}
+                        <div data-sr="right">
+                            <p className="label" style={{ marginBottom: 16 }}>Pourquoi Ad Boots</p>
+                            <h2 className="heading-xl" style={{ marginBottom: 20 }}>Chaque détail compte.<br />Surtout après l&apos;effort.</h2>
+                            <div className="divider divider-animated" />
+                            <p style={{ color: "var(--muted)", fontSize: "1rem", lineHeight: 1.8, marginBottom: 40 }}>
+                                La compression séquentielle n&apos;est plus réservée aux salles de kiné. Ad Boots vous apporte cette technologie là où vous en avez besoin, quand vous en avez besoin.
+                            </p>
+
+                            <div className="grid-2" style={{ gap: 2 }}>
+                                {BENEFITS.map((b, i) => (
+                                    <div key={b.title} data-sr="scale" data-sr-delay={`${i * 80}`} style={{
+                                        padding: "28px 24px",
+                                        background: i % 2 === 0 ? "var(--bg-surface)" : "var(--bg-surface-2)",
+                                        borderRadius: i === 0 ? "8px 0 0 0" : i === 1 ? "0 8px 0 0" : i === 2 ? "0 0 0 8px" : "0 0 8px 0",
+                                        border: "1px solid var(--border)",
+                                    }}>
+                                        <p style={{ color: "var(--accent)", fontSize: "clamp(2rem, 3vw, 2.8rem)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1, marginBottom: 10 }}>{b.num}</p>
+                                        <h3 style={{ fontWeight: 700, fontSize: "0.9rem", marginBottom: 8 }}>{b.title}</h3>
+                                        <p style={{ color: "var(--muted)", fontSize: "0.82rem", lineHeight: 1.7 }}>{b.desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div style={{ marginTop: 36 }}>
+                                <Link href="/pourquoi" className="btn-outline">
+                                    Découvrir la technologie
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ─── LIFESTYLE MOSAIC ─── */}
+            <section style={{ padding: "clamp(60px, 8vw, 96px) 0", borderTop: "1px solid var(--border)" }}>
+                <div className="container">
+                    <div data-sr style={{ maxWidth: 520, marginBottom: 52 }}>
+                        <p className="label" style={{ marginBottom: 14 }}>Partout, tout le temps</p>
+                        <h2 className="heading-xl">Récupération sans<br /><span style={{ color: "var(--accent)" }}>contrainte.</span></h2>
+                    </div>
+                    <div className="mosaic-grid">
+                        {[
+                            { src: "/assets/1F6D804D-15E5-4CDF-9D1E-D7ACDCCA3E53.png", label: "En télétravail", desc: "Récupérez en travaillant" },
+                            { src: "/assets/D28D064F-1532-45BA-AF50-C2411B3E2E46.png", label: "Le matin", desc: "Avant d'attaquer la journée" },
+                            { src: "/assets/CA4A8AF0-4693-4117-B002-2C4C059B5FD7.jpeg", label: "En famille", desc: "Sans empiéter sur votre vie" },
+                        ].map((item, i) => (
+                            <div key={item.label} className="photo-hover" data-sr="scale" data-sr-delay={`${i * 100}`} style={{ position: "relative", aspectRatio: "4/5", background: "var(--bg-surface-2)" }}>
+                                <img src={item.src} alt={item.label} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 55%)" }} />
+                                <div style={{ position: "absolute", bottom: 20, left: 20 }}>
+                                    <p style={{ color: "#fff", fontWeight: 700, fontSize: "0.9rem", lineHeight: 1.2 }}>{item.label}</p>
+                                    <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.75rem", marginTop: 4 }}>{item.desc}</p>
+                                </div>
                             </div>
                         ))}
-                    </div>
-
-                    <div style={{ textAlign: "center", marginTop: 48 }}>
-                        <Link href="/pourquoi" className="btn-outline">
-                            Découvrir la technologie
-                        </Link>
                     </div>
                 </div>
             </section>
@@ -292,9 +332,9 @@ export default function HomePage() {
             <section style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", padding: "clamp(60px, 10vw, 100px) 0" }}>
                 <div className="container">
                     <div className="grid-2" style={{ gap: "clamp(32px, 5vw, 80px)", alignItems: "center" }}>
-                        <div style={{ aspectRatio: "16/10", background: "var(--bg-surface-2)", borderRadius: 10, overflow: "hidden" }}>
+                        <div className="photo-hover" data-sr="left" style={{ aspectRatio: "4/3", background: "var(--bg-surface-2)", borderRadius: 8 }}>
                             <img
-                                src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?w=900&q=85"
+                                src="/assets/0F177FF4-65F3-4E3C-BEA9-E5DCBAA5CF5F.png"
                                 alt="Ad Boots en utilisation"
                                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
                             />
@@ -316,7 +356,7 @@ export default function HomePage() {
                                     "2 tailles : M (< 180 cm) · L (> 180 cm)",
                                 ].map(f => (
                                     <li key={f} style={{ display: "flex", alignItems: "center", gap: 12, fontSize: "0.875rem" }}>
-                                        <span style={{ color: "var(--accent)", fontSize: "0.65rem", flexShrink: 0 }}>✓</span>
+                                        <IconCheck size={13} color="var(--accent)" />
                                         {f}
                                     </li>
                                 ))}
@@ -343,7 +383,7 @@ export default function HomePage() {
 
                     <div className="grid-4" style={{ gap: 2 }}>
                         {STEPS.map((step, i) => (
-                            <div key={step.num} style={{
+                            <div key={step.num} data-sr data-sr-delay={`${i * 100}`} style={{
                                 padding: "40px 32px",
                                 background: "var(--bg-surface)",
                                 border: "1px solid var(--border)",
@@ -354,7 +394,7 @@ export default function HomePage() {
                                     fontWeight: 800,
                                     letterSpacing: "-0.04em",
                                     color: "transparent",
-                                    WebkitTextStroke: "1.5px rgba(34,197,94,0.35)",
+                                    WebkitTextStroke: "1.5px rgba(61,220,132,0.3)",
                                     lineHeight: 1,
                                     marginBottom: 24,
                                 }}>{step.num}</p>
@@ -377,23 +417,47 @@ export default function HomePage() {
                 <div className="container">
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 2 }}>
                         {[
-                            { icon: "🚚", title: "Livraison gratuite", desc: "En France métropolitaine, Belgique, Suisse" },
-                            { icon: "↩", title: "Retour 30 jours", desc: "Satisfait ou remboursé, sans conditions" },
-                            { icon: "🔒", title: "Paiement sécurisé", desc: "Chiffrement SSL — Stripe certifié" },
-                            { icon: "✓", title: "Garantie 2 ans", desc: "Prise en charge de tout défaut de fabrication" },
-                            { icon: "📦", title: "Expédition 48h", desc: "Traitement et envoi sous 2 jours ouvrés" },
+                            { Icon: IconTruck,      title: "Livraison gratuite", desc: "En France métropolitaine, Belgique, Suisse" },
+                            { Icon: IconReturn,     title: "Retour 30 jours", desc: "Satisfait ou remboursé, sans conditions" },
+                            { Icon: IconLock,       title: "Paiement sécurisé", desc: "Chiffrement SSL — Stripe certifié" },
+                            { Icon: IconShield,     title: "Garantie 2 ans", desc: "Prise en charge de tout défaut de fabrication" },
+                            { Icon: IconPackage,    title: "Expédition 48h", desc: "Traitement et envoi sous 2 jours ouvrés" },
                         ].map((r, i) => (
-                            <div key={r.title} style={{
+                            <div key={r.title} data-sr data-sr-delay={`${i * 60}`} style={{
                                 padding: "28px 24px",
                                 background: i % 2 === 0 ? "var(--bg-surface)" : "var(--bg-surface-2)",
                                 border: "1px solid var(--border)",
                                 textAlign: "center",
                             }}>
-                                <div style={{ fontSize: "1.6rem", marginBottom: 12 }}>{r.icon}</div>
+                                <div style={{ display: "flex", justifyContent: "center", marginBottom: 14 }}>
+                                    <r.Icon size={22} color="var(--accent)" />
+                                </div>
                                 <p style={{ fontWeight: 700, fontSize: "0.9rem", marginBottom: 6 }}>{r.title}</p>
                                 <p style={{ fontSize: "0.8rem", color: "var(--muted)", lineHeight: 1.6 }}>{r.desc}</p>
                             </div>
                         ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ─── NBA PRO PROOF ─── */}
+            <section style={{ position: "relative", overflow: "hidden", minHeight: "480px", display: "flex", alignItems: "center" }}>
+                <img
+                    src="/assets/48A89F2E-C37A-4782-A9CC-D4C8C01924F9.png"
+                    alt="Ad Boots utilisé en NBA"
+                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%" }}
+                />
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.4) 55%, transparent 100%)" }} />
+                <div className="container" style={{ position: "relative", zIndex: 1 }}>
+                    <div data-sr="left" style={{ maxWidth: 520 }}>
+                        <p className="label" style={{ color: "var(--accent)", marginBottom: 20 }}>Utilisé par les pros</p>
+                        <h2 className="heading-xl" style={{ color: "#fff", marginBottom: 20 }}>
+                            Sur les bancs<br />de la NBA.
+                        </h2>
+                        <div style={{ width: 32, height: 1, background: "var(--accent)", marginBottom: 24, opacity: 0.8 }} />
+                        <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "1rem", lineHeight: 1.8, maxWidth: 400 }}>
+                            Les joueurs professionnels récupèrent entre chaque mi-temps. AD Boots leur donne accès à la même technologie que vous, à domicile.
+                        </p>
                     </div>
                 </div>
             </section>
@@ -409,21 +473,21 @@ export default function HomePage() {
                             <p style={{ color: "var(--muted)", fontSize: "0.875rem", lineHeight: 1.75, marginBottom: 28 }}>
                                 Des sportifs qui ont intégré Ad Boots dans leur routine quotidienne.
                             </p>
-                            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                            <div style={{ display: "flex", gap: 3, alignItems: "center" }}>
                                 {Array.from({ length: 5 }).map((_, i) => (
-                                    <span key={i} style={{ color: "var(--accent)", fontSize: "1rem" }}>★</span>
+                                    <IconStar key={i} size={14} color="var(--accent)" />
                                 ))}
                                 <span style={{ color: "var(--muted)", fontSize: "0.78rem", marginLeft: 6 }}>5.0 · 47 avis vérifiés</span>
                             </div>
                         </div>
 
                         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                            {TESTIMONIALS.map(t => (
-                                <div key={t.name} className="testimonial-card" style={{ position: "relative", overflow: "hidden" }}>
+                            {TESTIMONIALS.map((t, i) => (
+                                <div key={t.name} className="testimonial-card card-lift" data-sr data-sr-delay={`${i * 120}`} style={{ position: "relative", overflow: "hidden" }}>
                                     <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: 2, background: "linear-gradient(to right, var(--accent), transparent)" }} />
                                     <div style={{ display: "flex", gap: 3, marginBottom: 8 }}>
                                         {Array.from({ length: 5 }).map((_, i) => (
-                                            <span key={i} style={{ color: "var(--accent)", fontSize: "0.85rem" }}>★</span>
+                                            <IconStar key={i} size={13} color="var(--accent)" />
                                         ))}
                                     </div>
                                     <p style={{ fontSize: "1rem", lineHeight: 1.85, fontStyle: "italic", flex: 1 }}>
@@ -436,8 +500,8 @@ export default function HomePage() {
                                         </div>
                                         <span style={{
                                             padding: "4px 10px",
-                                            background: "rgba(34,197,94,0.08)",
-                                            border: "1px solid rgba(34,197,94,0.2)",
+                                            background: "rgba(61,220,132,0.08)",
+                                            border: "1px solid rgba(61,220,132,0.2)",
                                             borderRadius: 100,
                                             fontSize: "0.72rem",
                                             fontWeight: 600,
@@ -494,28 +558,31 @@ export default function HomePage() {
                         ].map(col => (
                             <div key={col.label} className={col.highlight ? "cmp-featured" : undefined} style={{
                                 padding: "40px 32px",
-                                background: col.highlight ? "var(--fg)" : "var(--bg-surface-2)",
-                                border: col.highlight ? "2px solid var(--accent)" : "1px solid var(--border)",
+                                background: col.highlight ? "var(--bg-surface-3)" : "var(--bg-surface-2)",
+                                border: col.highlight ? "1px solid var(--border-accent)" : "1px solid var(--border)",
                                 borderRadius: 10,
                                 position: "relative",
                                 transform: col.highlight ? "translateY(-8px)" : undefined,
-                                boxShadow: col.highlight ? "0 24px 60px rgba(34,197,94,0.15)" : undefined,
+                                boxShadow: col.highlight ? "0 0 40px rgba(61,220,132,0.08)" : undefined,
                             }}>
                                 {col.highlight && (
                                     <div style={{ position: "absolute", top: -16, left: "50%", transform: "translateX(-50%)", background: "var(--accent)", color: "#000", padding: "4px 16px", borderRadius: 100, fontSize: "0.7rem", fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", whiteSpace: "nowrap" }}>
                                         Meilleur choix
                                     </div>
                                 )}
-                                <p style={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: col.highlight ? "rgba(255,255,255,0.5)" : "var(--muted)", marginBottom: 12 }}>{col.label}</p>
-                                <p style={{ fontSize: "clamp(1.6rem, 3vw, 2.2rem)", fontWeight: 800, color: col.highlight ? "#fff" : col.color, lineHeight: 1, marginBottom: 4 }}>{col.price}</p>
-                                <p style={{ fontSize: "0.8rem", color: col.highlight ? "rgba(255,255,255,0.45)" : "var(--muted)", marginBottom: 20 }}>{col.sub}</p>
-                                <div style={{ padding: "10px 14px", background: col.highlight ? "rgba(34,197,94,0.15)" : "rgba(0,0,0,0.04)", borderRadius: 6, marginBottom: 24 }}>
+                                <p style={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--muted)", marginBottom: 12 }}>{col.label}</p>
+                                <p style={{ fontSize: "clamp(1.6rem, 3vw, 2.2rem)", fontWeight: 800, color: col.highlight ? "var(--ad-green)" : col.color, lineHeight: 1, marginBottom: 4 }}>{col.price}</p>
+                                <p style={{ fontSize: "0.8rem", color: "var(--muted)", marginBottom: 20 }}>{col.sub}</p>
+                                <div style={{ padding: "10px 14px", background: col.highlight ? "rgba(61,220,132,0.08)" : "rgba(255,255,255,0.03)", borderRadius: 4, marginBottom: 24, border: "1px solid var(--border)" }}>
                                     <p style={{ fontSize: "0.78rem", fontWeight: 600, color: col.highlight ? "var(--accent)" : col.color }}>{col.annual}</p>
                                 </div>
                                 <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 10 }}>
                                     {col.items.map(item => (
-                                        <li key={item} style={{ display: "flex", gap: 10, alignItems: "flex-start", fontSize: "0.85rem", color: col.highlight ? "rgba(255,255,255,0.75)" : "var(--muted)" }}>
-                                            <span style={{ color: col.highlight ? "var(--accent)" : col.color, flexShrink: 0 }}>{col.highlight ? "✓" : "×"}</span>
+                                        <li key={item} style={{ display: "flex", gap: 10, alignItems: "flex-start", fontSize: "0.85rem", color: "var(--fg-2)" }}>
+                                            {col.highlight
+                                                ? <IconCheck size={14} color={col.color} style={{ marginTop: 2 }} />
+                                                : <IconX size={14} color={col.color} style={{ marginTop: 2 }} />
+                                            }
                                             {item}
                                         </li>
                                     ))}
@@ -540,7 +607,7 @@ export default function HomePage() {
                             <h2 className="heading-lg" style={{ marginBottom: 20 }}>Vos questions,<br />nos réponses.</h2>
                             <div className="divider" />
                             <p style={{ color: "var(--muted)", fontSize: "0.875rem", lineHeight: 1.75, marginBottom: 28 }}>
-                                Une question qui bloque ? Écrivez-nous à contact@ad-boots.com.
+                                Une question qui bloque ? Écrivez-nous à contact@adboots.fr.
                             </p>
                         </div>
 
@@ -604,21 +671,23 @@ export default function HomePage() {
             </section>
 
             {/* ─── FINAL CTA ─── */}
-            <section style={{ background: "var(--fg)", padding: "clamp(60px, 10vw, 100px) 0" }}>
-                <div className="container" style={{ textAlign: "center" }}>
-                    <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 16px", background: "rgba(34,197,94,0.15)", border: "1px solid rgba(34,197,94,0.3)", borderRadius: 100, marginBottom: 28 }}>
+            <section style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--border)", padding: "clamp(60px, 10vw, 100px) 0", position: "relative", overflow: "hidden" }}>
+                <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 70% at 50% 100%, rgba(61,220,132,0.09) 0%, transparent 70%)", pointerEvents: "none" }} />
+                <div className="container" style={{ textAlign: "center", position: "relative", zIndex: 1 }}>
+                    <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 16px", background: "rgba(61,220,132,0.08)", border: "1px solid rgba(61,220,132,0.22)", borderRadius: 100, marginBottom: 28 }}>
                         <span style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--accent)", display: "inline-block" }} />
                         <span style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--accent)" }}>Stock limité — quelques unités disponibles</span>
                     </div>
-                    <h2 style={{ fontSize: "clamp(2rem, 5vw, 4rem)", fontWeight: 800, letterSpacing: "-0.03em", color: "#fff", marginBottom: 20, lineHeight: 1.05 }}>
-                        Votre récupération<br />commence maintenant.
+                    <h2 data-sr className="heading-xl" style={{ marginBottom: 20 }}>
+                        Votre récupération<br />
+                        <span className="text-shimmer">commence maintenant.</span>
                     </h2>
-                    <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "1rem", maxWidth: 440, margin: "0 auto 40px", lineHeight: 1.8 }}>
+                    <p style={{ color: "var(--fg-2)", fontSize: "1rem", maxWidth: 440, margin: "0 auto 40px", lineHeight: 1.8 }}>
                         AD Boots Pro · 350 € · Paiement sécurisé par Stripe<br />
                         Livraison gratuite · Retour 30 jours · Garantie 2 ans
                     </p>
                     <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap", marginBottom: 28 }}>
-                        <Link href="/produit" style={{
+                        <Link href="/produit" className="btn-glow" style={{
                             display: "inline-flex", alignItems: "center", gap: 10,
                             padding: "18px 44px",
                             background: "var(--accent)", color: "#000",
@@ -631,18 +700,25 @@ export default function HomePage() {
                         <Link href="/pourquoi" style={{
                             display: "inline-flex", alignItems: "center", gap: 10,
                             padding: "18px 32px",
-                            background: "transparent", color: "rgba(255,255,255,0.6)",
+                            background: "transparent", color: "var(--fg-2)",
                             fontWeight: 600, fontSize: "0.875rem",
                             letterSpacing: "0.06em", textTransform: "uppercase",
                             borderRadius: "var(--radius)",
-                            border: "1px solid rgba(255,255,255,0.15)",
+                            border: "1px solid var(--border-strong)",
                         }}>
                             En savoir plus
                         </Link>
                     </div>
                     <div style={{ display: "flex", gap: 28, justifyContent: "center", flexWrap: "wrap" }}>
-                        {["🔒 Paiement sécurisé", "🚚 Livraison offerte", "↩ Retour 30j"].map(item => (
-                            <span key={item} style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.35)", fontWeight: 500 }}>{item}</span>
+                        {[
+                            { Icon: IconLock,   label: "Paiement sécurisé" },
+                            { Icon: IconTruck,  label: "Livraison offerte" },
+                            { Icon: IconReturn, label: "Retour 30j" },
+                        ].map(item => (
+                            <span key={item.label} style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: "0.78rem", color: "var(--muted)", fontWeight: 500 }}>
+                                <item.Icon size={13} color="var(--muted)" />
+                                {item.label}
+                            </span>
                         ))}
                     </div>
                 </div>

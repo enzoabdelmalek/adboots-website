@@ -1,7 +1,10 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Pourquoi Ad Boots — La Technologie" };
+export const metadata: Metadata = {
+    title: "Pourquoi Ad Boots — La Technologie",
+    description: "La pressothérapie séquentielle expliquée : comment les 4 chambres accélèrent votre récupération musculaire et pourquoi AD Boots la rend accessible.",
+};
 
 const STEPS = [
     { num: "01", title: "Gonflage séquentiel", desc: "Les chambres de la botte se gonflent les unes après les autres, de la cheville vers le genou. Cette séquence imite le mécanisme naturel de la pompe musculaire." },
@@ -16,6 +19,13 @@ const VALUES = [
     { title: "Conçu avec des professionnels", desc: "Développé en collaboration avec des kinésithérapeutes du sport et des préparateurs physiques de clubs professionnels." },
 ];
 
+const STATS = [
+    { num: "4", label: "Chambres séquentielles" },
+    { num: "2", label: "Tailles disponibles (M / L)" },
+    { num: "USB-C", label: "Recharge universelle" },
+    { num: "100%", label: "Sans fil — télécommande incluse" },
+];
+
 export default function PourquoiPage() {
     return (
         <>
@@ -23,13 +33,13 @@ export default function PourquoiPage() {
             <section style={{ background: "var(--bg-surface)", borderBottom: "1px solid var(--border)", padding: "clamp(60px, 10vw, 100px) 0" }}>
                 <div className="container">
                     <div style={{ maxWidth: 640 }}>
-                        <p className="label" style={{ marginBottom: 20 }}>La Technologie</p>
-                        <h1 className="heading-xl" style={{ marginBottom: 24 }}>
+                        <p className="label anim-1" style={{ marginBottom: 20 }}>La Technologie</p>
+                        <h1 className="heading-xl anim-2" style={{ marginBottom: 24 }}>
                             Pourquoi<br />Ad Boots ?
                         </h1>
-                        <div className="divider" />
-                        <p style={{ color: "var(--muted)", fontSize: "1rem", lineHeight: 1.85 }}>
-                            La pressothérapie n'est pas une tendance. C'est une technique médicale validée, utilisée depuis des décennies dans les hôpitaux et les staffs sportifs professionnels. On l'a rendue accessible.
+                        <div className="divider divider-animated" />
+                        <p className="anim-3" style={{ color: "var(--muted)", fontSize: "1rem", lineHeight: 1.85 }}>
+                            La pressothérapie n&apos;est pas une tendance. C&apos;est une technique médicale validée, utilisée depuis des décennies dans les hôpitaux et les staffs sportifs professionnels. On l&apos;a rendue accessible.
                         </p>
                     </div>
                 </div>
@@ -39,7 +49,7 @@ export default function PourquoiPage() {
             <section className="section">
                 <div className="container">
                     <div className="grid-2" style={{ gap: "clamp(32px, 5vw, 80px)", alignItems: "center", marginBottom: 80 }}>
-                        <div>
+                        <div data-sr="left">
                             <p className="label" style={{ marginBottom: 16 }}>La Science</p>
                             <h2 className="heading-lg" style={{ marginBottom: 24 }}>
                                 Ce qui se passe<br />dans vos muscles.
@@ -52,18 +62,16 @@ export default function PourquoiPage() {
                                 La compression séquentielle accélère ce processus en forçant le retour circulatoire et en drainant activement les zones de tension.
                             </p>
                         </div>
-                        <div style={{
+                        <div className="photo-hover" data-sr="right" style={{
                             aspectRatio: "4/3",
-                            background: "linear-gradient(145deg, var(--bg-surface) 0%, #0d1f12 100%)",
+                            background: "linear-gradient(145deg, var(--bg-surface) 0%, var(--bg-surface-2) 100%)",
                             borderRadius: 12,
-                            overflow: "hidden",
-                            position: "relative",
-                            border: "1px solid rgba(75,222,128,0.08)",
+                            border: "1px solid var(--border)",
                         }}>
                             <img
-                                src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&q=85"
+                                src="/assets/48A89F2E-C37A-4782-A9CC-D4C8C01924F9.png"
                                 alt="Récupération sportive"
-                                style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.6 }}
+                                style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.9 }}
                             />
                         </div>
                     </div>
@@ -71,7 +79,7 @@ export default function PourquoiPage() {
                     {/* Steps */}
                     <div className="grid-4" style={{ gap: 2 }}>
                         {STEPS.map((s, i) => (
-                            <div key={s.num} style={{
+                            <div key={s.num} data-sr data-sr-delay={`${i * 100}`} style={{
                                 padding: "36px 28px",
                                 background: i % 2 === 0 ? "var(--bg-surface)" : "var(--bg-surface-2)",
                                 borderRadius: i === 0 ? "8px 0 0 8px" : i === 3 ? "0 8px 8px 0" : 0,
@@ -90,13 +98,8 @@ export default function PourquoiPage() {
             <section style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", padding: "60px 0" }}>
                 <div className="container">
                     <div className="grid-4" style={{ gap: "clamp(20px, 4vw, 40px)", textAlign: "center" }}>
-                        {[
-                            { num: "4", label: "Chambres séquentielles" },
-                            { num: "2", label: "Tailles disponibles (M / L)" },
-                            { num: "USB-C", label: "Recharge universelle" },
-                            { num: "100%", label: "Sans fil — télécommande incluse" },
-                        ].map(s => (
-                            <div key={s.label}>
+                        {STATS.map((s, i) => (
+                            <div key={s.label} data-sr="scale" data-sr-delay={`${i * 80}`}>
                                 <p style={{ color: "var(--accent)", fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1, marginBottom: 10 }}>{s.num}</p>
                                 <p style={{ color: "var(--muted)", fontSize: "0.82rem", fontWeight: 500, letterSpacing: "0.04em" }}>{s.label}</p>
                             </div>
@@ -108,10 +111,10 @@ export default function PourquoiPage() {
             {/* ─── Values ─── */}
             <section className="section">
                 <div className="container">
-                    <div style={{ maxWidth: 520, marginBottom: 64 }}>
+                    <div data-sr style={{ maxWidth: 520, marginBottom: 64 }}>
                         <p className="label" style={{ marginBottom: 16 }}>Notre Histoire</p>
                         <h2 className="heading-lg" style={{ marginBottom: 20 }}>
-                            Ad Boots est né d'une frustration.
+                            Ad Boots est né d&apos;une frustration.
                         </h2>
                         <div className="divider" />
                         <p style={{ color: "var(--muted)", fontSize: "0.95rem", lineHeight: 1.85 }}>
@@ -121,11 +124,12 @@ export default function PourquoiPage() {
 
                     <div className="grid-3" style={{ gap: 2, marginBottom: 60 }}>
                         {VALUES.map((v, i) => (
-                            <div key={v.title} style={{
+                            <div key={v.title} data-sr data-sr-delay={`${i * 100}`} style={{
                                 padding: "40px 32px",
                                 background: "var(--bg-surface)",
                                 border: "1px solid var(--border)",
                                 borderRadius: i === 0 ? "8px 0 0 8px" : i === 2 ? "0 8px 8px 0" : 0,
+                                transition: "border-color 0.2s",
                             }}>
                                 <h3 className="heading-md" style={{ marginBottom: 16, fontSize: "1.1rem" }}>{v.title}</h3>
                                 <p style={{ color: "var(--muted)", fontSize: "0.875rem", lineHeight: 1.8 }}>{v.desc}</p>
@@ -134,19 +138,19 @@ export default function PourquoiPage() {
                     </div>
 
                     {/* Quote */}
-                    <div style={{
+                    <div data-sr="scale" style={{
                         padding: "48px",
-                        background: "linear-gradient(135deg, rgba(75,222,128,0.04) 0%, transparent 100%)",
-                        border: "1px solid rgba(75,222,128,0.12)",
+                        background: "color-mix(in srgb, var(--accent) 4%, transparent)",
+                        border: "1px solid color-mix(in srgb, var(--accent) 12%, transparent)",
                         borderRadius: 12,
                         maxWidth: 800,
                         margin: "0 auto",
                         textAlign: "center",
                     }}>
                         <p style={{ fontSize: "clamp(1.1rem, 2vw, 1.4rem)", fontStyle: "italic", lineHeight: 1.8, marginBottom: 24 }}>
-                            &ldquo;La récupération, c'est 50% de la performance. On a arrêté de l'ignorer.&rdquo;
+                            &ldquo;La récupération, c&apos;est 50% de la performance. On a arrêté de l&apos;ignorer.&rdquo;
                         </p>
-                        <p style={{ color: "var(--muted)", fontSize: "0.85rem" }}>— Fondateurs d'Ad Boots</p>
+                        <p style={{ color: "var(--muted)", fontSize: "0.85rem" }}>— Fondateurs d&apos;Ad Boots</p>
                     </div>
                 </div>
             </section>
@@ -154,12 +158,12 @@ export default function PourquoiPage() {
             {/* ─── CTA ─── */}
             <section style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--border)", padding: "80px 0" }}>
                 <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 32 }}>
-                    <div>
+                    <div data-sr="left">
                         <h2 className="heading-lg" style={{ marginBottom: 12 }}>Convaincu ?</h2>
                         <p style={{ color: "var(--muted)", fontSize: "0.9rem" }}>Découvrez le produit et commandez directement.</p>
                     </div>
-                    <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
-                        <Link href="/produit" className="btn-primary">Voir le produit — 350 €</Link>
+                    <div data-sr="right" style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+                        <Link href="/produit" className="btn-primary btn-glow">Voir le produit — 350 €</Link>
                         <Link href="/contact" className="btn-outline">Nous contacter</Link>
                     </div>
                 </div>

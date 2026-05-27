@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useCart } from "@/app/context/CartContext";
+import ThemeToggle from "@/app/components/ThemeToggle";
 
 const LINKS = [
     { href: "/produit", label: "Le Produit" },
@@ -51,6 +52,8 @@ export default function Navbar() {
                         <Link href="/produit" className="btn-primary navbar-cta" style={{ padding: "10px 22px", fontSize: "0.78rem" }}>
                             Commander
                         </Link>
+
+                        <ThemeToggle />
 
                         {/* Cart */}
                         <button className="cart-btn" onClick={openCart} aria-label="Ouvrir le panier">

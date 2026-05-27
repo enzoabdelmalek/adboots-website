@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Politique de confidentialité — AD Boots" };
+export const metadata: Metadata = {
+    title: "Politique de confidentialité — AD Boots",
+    description: "Politique de confidentialité AD Boots : données collectées, finalités du traitement, droits RGPD et gestion des cookies.",
+};
 
 const SECTION = ({ title, children }: { title: string; children: React.ReactNode }) => (
     <div style={{ marginBottom: 48 }}>
@@ -29,7 +32,7 @@ export default function ConfidentialitePage() {
                     <SECTION title="1. Responsable du traitement">
                         <p>
                             AD Boots — Responsable : Denis Mayele<br />
-                            Email : contact@ad-boots.com
+                            Email : contact@adboots.fr
                         </p>
                     </SECTION>
 
@@ -86,7 +89,7 @@ export default function ConfidentialitePage() {
                             <li><strong style={{ color: "var(--fg)" }}>Portabilité</strong> : recevoir vos données dans un format structuré</li>
                         </ul>
                         <p style={{ marginTop: 12 }}>
-                            Pour exercer ces droits : contact@ad-boots.com<br />
+                            Pour exercer ces droits : contact@adboots.fr<br />
                             Vous pouvez également introduire une réclamation auprès de la <a href="https://www.cnil.fr" style={{ color: "var(--accent)" }}>CNIL</a>.
                         </p>
                     </SECTION>

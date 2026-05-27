@@ -16,7 +16,7 @@ export default function Footer() {
                     {/* Brand */}
                     <div>
                         <Link href="/" style={{ display: "inline-block", marginBottom: 20 }}>
-                            <span style={{ fontSize: "1.1rem", fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--fg)" }}>
+                            <span style={{ fontFamily: "var(--font-display)", fontSize: "1.1rem", fontWeight: 900, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--fg)" }}>
                                 AD<span style={{ color: "var(--accent)" }}>.</span>BOOTS
                             </span>
                         </Link>

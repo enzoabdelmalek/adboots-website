@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Mentions légales — AD Boots" };
+export const metadata: Metadata = {
+    title: "Mentions légales — AD Boots",
+    description: "Mentions légales du site AD Boots : éditeur, hébergeur, propriété intellectuelle et données personnelles.",
+};
 
 const SECTION = ({ title, children }: { title: string; children: React.ReactNode }) => (
     <div style={{ marginBottom: 48 }}>
@@ -31,12 +34,12 @@ export default function MentionsLegalesPage() {
                         <p style={{ marginTop: 8 }}><strong style={{ color: "var(--fg)" }}>Forme juridique :</strong> [À compléter — ex : Auto-entrepreneur / SAS / SARL]</p>
                         <p style={{ marginTop: 8 }}><strong style={{ color: "var(--fg)" }}>SIRET :</strong> <span style={{ color: "#f87171" }}>[À compléter]</span></p>
                         <p style={{ marginTop: 8 }}><strong style={{ color: "var(--fg)" }}>Adresse du siège social :</strong> <span style={{ color: "#f87171" }}>[À compléter]</span></p>
-                        <p style={{ marginTop: 8 }}><strong style={{ color: "var(--fg)" }}>Email :</strong> contact@ad-boots.com</p>
+                        <p style={{ marginTop: 8 }}><strong style={{ color: "var(--fg)" }}>Email :</strong> contact@adboots.fr</p>
                     </SECTION>
 
                     <SECTION title="Responsable de publication">
                         <p>Denis Mayele</p>
-                        <p style={{ marginTop: 8 }}>Email : contact@ad-boots.com</p>
+                        <p style={{ marginTop: 8 }}>Email : contact@adboots.fr</p>
                     </SECTION>
 
                     <SECTION title="Hébergement">
@@ -56,7 +59,7 @@ export default function MentionsLegalesPage() {
                         <p>
                             Les informations collectées lors d'une commande (nom, adresse, email) sont utilisées uniquement pour le traitement de celle-ci.
                             Elles ne sont jamais revendues à des tiers. Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression
-                            de vos données en contactant : contact@ad-boots.com
+                            de vos données en contactant : contact@adboots.fr
                         </p>
                         <p style={{ marginTop: 12 }}>
                             Pour plus de détails, consultez notre <a href="/confidentialite" style={{ color: "var(--accent)" }}>politique de confidentialité</a>.
