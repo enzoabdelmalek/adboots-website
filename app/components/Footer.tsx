@@ -56,7 +56,17 @@ export default function Footer() {
 
                 {/* Bottom */}
                 <div className="footer-bottom">
-                    <span>© {new Date().getFullYear()} Ad Boots. Tous droits réservés.</span>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                        <span>© {new Date().getFullYear()} Ad Boots. Tous droits réservés.</span>
+                        <span style={{ fontSize: "0.72rem", color: "var(--muted)", opacity: 0.6 }}>
+                            Développé & designé par{" "}
+                            <a href="https://vibewebagency.fr" target="_blank" rel="noopener noreferrer" style={{ color: "var(--muted)", transition: "color 0.2s" }}
+                                onMouseEnter={e => (e.currentTarget.style.color = "var(--fg)")}
+                                onMouseLeave={e => (e.currentTarget.style.color = "var(--muted)")}>
+                                Vibe Web Agency
+                            </a>
+                        </span>
+                    </div>
                     <div style={{ display: "flex", gap: 20 }}>
                         {["Visa", "Mastercard", "Apple Pay", "PayPal"].map(p => (
                             <span key={p} style={{ background: "var(--bg-surface)", border: "1px solid var(--border)", borderRadius: 3, padding: "3px 8px", fontSize: "0.7rem", color: "var(--muted)" }}>
