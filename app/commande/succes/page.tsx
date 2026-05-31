@@ -1,18 +1,30 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useCart } from "@/app/context/CartContext";
 import { IconPackage, IconMail, IconReturn } from "@/app/components/Icons";
 import Link from "next/link";
 
 export default function SuccessPage() {
-    const { items, updateQty, removeItem } = useCart();
+    const { items, removeItem } = useCart();
+    const searchParams = useSearchParams();
+    const [orderNumber, setOrderNumber] = useState<string | null>(null);
 
-    // Vider le panier à l'arrivée sur cette page
     useEffect(() => {
         items.forEach(item => removeItem(item.id, item.size));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() => {
+        const sessionId = searchParams.get("session_id");
+        if (!sessionId) return;
+
+        fetch(`/api/order-number?session_id=${sessionId}`)
+            .then(r => r.json())
+            .then(d => { if (d.order_number) setOrderNumber(d.order_number); })
+            .catch(() => {});
+    }, [searchParams]);
 
     return (
         <section style={{ minHeight: "80vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "80px 24px" }}>
@@ -30,6 +42,13 @@ export default function SuccessPage() {
                 </div>
 
                 <h1 className="heading-xl" style={{ marginBottom: 16 }}>Commande confirmée</h1>
+
+                {orderNumber && (
+                    <p style={{ fontSize: "0.85rem", color: "var(--muted)", marginBottom: 8, letterSpacing: "0.05em" }}>
+                        Commande n° <span style={{ color: "var(--fg)", fontWeight: 700, fontFamily: "var(--font-mono)" }}>{orderNumber}</span>
+                    </p>
+                )}
+
                 <p style={{ color: "var(--muted)", fontSize: "1rem", lineHeight: 1.75, marginBottom: 32 }}>
                     Merci pour votre achat ! Vous recevrez un email de confirmation sous quelques minutes.
                     Votre commande sera expédiée sous 48h ouvrées.

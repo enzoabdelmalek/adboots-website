@@ -17,7 +17,7 @@ export default function Cart() {
             const res = await fetch("/api/checkout", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ items }),
+                body: JSON.stringify({ items: items.map(({ id, size, qty }) => ({ id, size, qty })) }),
             });
             const data = await res.json();
             if (!res.ok || !data.url) throw new Error(data.error || "Erreur");

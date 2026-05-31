@@ -1,6 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
+import { createHash } from "crypto";
+
+function generateOrderNumber(orderId: string): string {
+    const hash = createHash("sha256")
+        .update(orderId + Date.now().toString())
+        .digest("hex");
+    return "ADB-" + hash.substring(0, 8).toUpperCase();
+}
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
@@ -11,13 +19,14 @@ const supabase = createClient(
 
 const BUSINESS_ID = "f9e291c2-0fea-4b24-8abb-57264e001cd3";
 
+const PRODUCT_CATALOG: Record<string, { name: string; price: number }> = {
+    "adboots-pro": { name: "AD Boots Pro", price: 350 },
+};
+
 interface CartItem {
     id: string;
-    name: string;
-    price: number;
     size: string;
     qty: number;
-    image?: string;
 }
 
 export async function POST(req: NextRequest) {
@@ -28,7 +37,32 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "Panier vide" }, { status: 400 });
         }
 
-        const totalAmount = items.reduce((s, i) => s + i.price * i.qty, 0);
+        const VALID_SIZES = ["M", "L"];
+
+        // Validate all items against server-side catalog
+        for (const item of items) {
+            if (!PRODUCT_CATALOG[item.id]) {
+                return NextResponse.json({ error: "Produit invalide" }, { status: 400 });
+            }
+            if (!VALID_SIZES.includes(item.size)) {
+                return NextResponse.json({ error: "Taille invalide" }, { status: 400 });
+            }
+            if (!Number.isInteger(item.qty) || item.qty < 1 || item.qty > 10) {
+                return NextResponse.json({ error: "Quantité invalide" }, { status: 400 });
+            }
+        }
+
+        const resolvedItems = items.map(i => ({
+            ...i,
+            name: PRODUCT_CATALOG[i.id].name,
+            price: PRODUCT_CATALOG[i.id].price,
+        }));
+
+        const totalAmount = resolvedItems.reduce((s, i) => s + i.price * i.qty, 0);
+
+        // Générer un UUID temporaire pour le hash avant insert
+        const tempId = crypto.randomUUID();
+        const orderNumber = generateOrderNumber(tempId);
 
         // Créer l'ordre en base (pending)
         const { data: order, error: orderError } = await supabase
@@ -37,13 +71,13 @@ export async function POST(req: NextRequest) {
                 business_id: BUSINESS_ID,
                 status: "pending",
                 total_amount: totalAmount,
-                items: items.map(i => ({ name: `${i.name} — Taille ${i.size}`, price: i.price, qty: i.qty })),
+                order_number: orderNumber,
+                items: resolvedItems.map(i => ({ name: `${i.name} — Taille ${i.size}`, price: i.price, qty: i.qty })),
             })
-            .select("id")
+            .select("id, order_number")
             .single();
 
         if (orderError || !order) {
-            console.error("Erreur création ordre:", orderError);
             return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
         }
 
@@ -51,18 +85,19 @@ export async function POST(req: NextRequest) {
         const session = await stripe.checkout.sessions.create({
             mode: "payment",
             payment_method_types: ["card", "paypal"],
-            line_items: items.map(item => ({
+            line_items: resolvedItems.map(item => ({
                 price_data: {
                     currency: "eur",
                     product_data: {
                         name: `${item.name} — Taille ${item.size}`,
                     },
-                    unit_amount: Math.round(item.price * 100),
+                    unit_amount: item.price * 100,
                 },
                 quantity: item.qty,
             })),
             metadata: {
                 order_id: order.id,
+                order_number: order.order_number,
             },
             billing_address_collection: "required",
             shipping_address_collection: {
@@ -80,9 +115,7 @@ export async function POST(req: NextRequest) {
             .eq("id", order.id);
 
         return NextResponse.json({ url: session.url });
-    } catch (err) {
-        const message = err instanceof Error ? err.message : String(err);
-        console.error("Erreur checkout:", message);
-        return NextResponse.json({ error: "Erreur serveur", detail: message }, { status: 500 });
+    } catch {
+        return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
     }
 }

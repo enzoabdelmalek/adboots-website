@@ -20,8 +20,7 @@ export async function POST(req: NextRequest) {
     let event: Stripe.Event;
     try {
         event = stripe.webhooks.constructEvent(body, sig, process.env.STRIPE_WEBHOOK_SECRET!);
-    } catch (err) {
-        console.error("Webhook signature invalide:", err);
+    } catch {
         return NextResponse.json({ error: "Signature invalide" }, { status: 400 });
     }
 
@@ -33,11 +32,22 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "order_id manquant" }, { status: 400 });
         }
 
+        // Idempotency: only process if still pending
+        const { data: order } = await supabase
+            .from("orders")
+            .select("status")
+            .eq("id", orderId)
+            .single();
+
+        if (!order || order.status !== "pending") {
+            return NextResponse.json({ received: true });
+        }
+
         const customerName = session.customer_details?.name ?? null;
         const customerEmail = session.customer_details?.email ?? null;
         const customerPhone = session.customer_details?.phone ?? null;
 
-        const { error } = await supabase
+        await supabase
             .from("orders")
             .update({
                 status: "processing",
@@ -46,13 +56,8 @@ export async function POST(req: NextRequest) {
                 customer_phone: customerPhone,
                 updated_at: new Date().toISOString(),
             })
-            .eq("id", orderId);
-
-        if (error) {
-            console.error("Erreur mise à jour ordre:", error);
-            return NextResponse.json({ error: "Erreur DB" }, { status: 500 });
-        }
-
+            .eq("id", orderId)
+            .eq("status", "pending");
     }
 
     return NextResponse.json({ received: true });
