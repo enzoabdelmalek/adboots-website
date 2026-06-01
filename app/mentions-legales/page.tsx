@@ -30,16 +30,16 @@ export default function MentionsLegalesPage() {
                 <div className="container" style={{ maxWidth: 760 }}>
 
                     <SECTION title="Éditeur du site">
-                        <p><strong style={{ color: "var(--fg)" }}>Dénomination sociale :</strong> AD Boots</p>
-                        <p style={{ marginTop: 8 }}><strong style={{ color: "var(--fg)" }}>Forme juridique :</strong> [À compléter — ex : Auto-entrepreneur / SAS / SARL]</p>
-                        <p style={{ marginTop: 8 }}><strong style={{ color: "var(--fg)" }}>SIRET :</strong> <span style={{ color: "#f87171" }}>[À compléter]</span></p>
-                        <p style={{ marginTop: 8 }}><strong style={{ color: "var(--fg)" }}>Adresse du siège social :</strong> <span style={{ color: "#f87171" }}>[À compléter]</span></p>
-                        <p style={{ marginTop: 8 }}><strong style={{ color: "var(--fg)" }}>Email :</strong> contact@adboots.fr</p>
+                        <p><strong style={{ color: "var(--fg)" }}>Dénomination sociale :</strong> DIOP INDUSTRIE LLC</p>
+                        <p style={{ marginTop: 8 }}><strong style={{ color: "var(--fg)" }}>Forme juridique :</strong> Limited Liability Company (LLC) — État du Nouveau-Mexique, États-Unis</p>
+                        <p style={{ marginTop: 8 }}><strong style={{ color: "var(--fg)" }}>Entity ID :</strong> 0008084994</p>
+                        <p style={{ marginTop: 8 }}><strong style={{ color: "var(--fg)" }}>Adresse du siège social :</strong> 8206 Louisiana Blvd NE, Ste A #8747, Albuquerque, NM 87113, États-Unis</p>
+                        <p style={{ marginTop: 8 }}><strong style={{ color: "var(--fg)" }}>Email :</strong> contact@ad-boots.com</p>
                     </SECTION>
 
                     <SECTION title="Responsable de publication">
-                        <p>Denis Mayele</p>
-                        <p style={{ marginTop: 8 }}>Email : contact@adboots.fr</p>
+                        <p>Abdoulaye Diop — Member</p>
+                        <p style={{ marginTop: 8 }}>Email : contact@ad-boots.com</p>
                     </SECTION>
 
                     <SECTION title="Hébergement">
@@ -59,7 +59,7 @@ export default function MentionsLegalesPage() {
                         <p>
                             Les informations collectées lors d'une commande (nom, adresse, email) sont utilisées uniquement pour le traitement de celle-ci.
                             Elles ne sont jamais revendues à des tiers. Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression
-                            de vos données en contactant : contact@adboots.fr
+                            de vos données en contactant : contact@ad-boots.com
                         </p>
                         <p style={{ marginTop: 12 }}>
                             Pour plus de détails, consultez notre <a href="/confidentialite" style={{ color: "var(--accent)" }}>politique de confidentialité</a>.

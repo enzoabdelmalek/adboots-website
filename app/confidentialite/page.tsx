@@ -31,8 +31,8 @@ export default function ConfidentialitePage() {
 
                     <SECTION title="1. Responsable du traitement">
                         <p>
-                            AD Boots — Responsable : Denis Mayele<br />
-                            Email : contact@adboots.fr
+                            DIOP INDUSTRIE LLC — Responsable : Abdoulaye Diop<br />
+                            Email : contact@ad-boots.com
                         </p>
                     </SECTION>
 
@@ -89,7 +89,7 @@ export default function ConfidentialitePage() {
                             <li><strong style={{ color: "var(--fg)" }}>Portabilité</strong> : recevoir vos données dans un format structuré</li>
                         </ul>
                         <p style={{ marginTop: 12 }}>
-                            Pour exercer ces droits : contact@adboots.fr<br />
+                            Pour exercer ces droits : contact@ad-boots.com<br />
                             Vous pouvez également introduire une réclamation auprès de la <a href="https://www.cnil.fr" style={{ color: "var(--accent)" }}>CNIL</a>.
                         </p>
                     </SECTION>

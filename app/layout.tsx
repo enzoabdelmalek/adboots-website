@@ -33,8 +33,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="fr" className={`${geist.variable} ${geistMono.variable} ${archivo.variable}`}>
             <head>
-                {/* Prevent flash of wrong theme */}
-                <script dangerouslySetInnerHTML={{ __html: `(function(){try{if(localStorage.getItem('ad-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}})()` }} />
+                {/* Dark theme by default */}
+                <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('ad-theme');if(t==='light'){return;}document.documentElement.classList.add('dark');}catch(e){document.documentElement.classList.add('dark');}})()` }} />
                 <Script src="https://tracker-production-9a75.up.railway.app/track.js?id=f9e291c2-0fea-4b24-8abb-57264e001cd3" strategy="afterInteractive" />
             </head>
             <body>

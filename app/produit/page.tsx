@@ -143,7 +143,7 @@ export default function ProduitPage() {
                                 <img
                                     src={IMAGES[activeImg]}
                                     alt="Ad Boots Pro"
-                                    style={{ width: "100%", height: "100%", objectFit: "cover", transition: "opacity 0.3s" }}
+                                    style={{ width: "100%", height: "100%", objectFit: "contain", transition: "opacity 0.3s" }}
                                 />
                             </div>
                             <div className="gallery-thumbs">
