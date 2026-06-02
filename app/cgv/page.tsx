@@ -38,7 +38,7 @@ export default function CGVPage() {
 
                     <SECTION title="2. Produits">
                         <p>
-                            Les produits proposés à la vente sont les AD Boots Pro, bottes de compression pneumatique sans fil à 4 chambres séquentielles.
+                            Les produits proposés à la vente sont les Bottes récupératives AD Boots, bottes de compression pneumatique sans fil à 4 chambres séquentielles.
                             Les caractéristiques essentielles de chaque produit sont présentées sur la fiche produit du site.
                         </p>
                         <p style={{ marginTop: 12 }}>

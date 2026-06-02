@@ -75,8 +75,21 @@ export default function ProduitPage() {
     const [added, setAdded] = useState(false);
     const [activeTab, setActiveTab] = useState<"benefits" | "specs" | "kit">("benefits");
     const [showSizeGuide, setShowSizeGuide] = useState(false);
+    const [showStickyCTA, setShowStickyCTA] = useState(false);
+    const addBtnRef = useRef<HTMLButtonElement>(null);
     const sizeGuideRef = useRef<HTMLDivElement>(null);
     const { addItem } = useCart();
+
+    useEffect(() => {
+        const btn = addBtnRef.current;
+        if (!btn) return;
+        const observer = new IntersectionObserver(
+            ([entry]) => setShowStickyCTA(!entry.isIntersecting),
+            { threshold: 0 }
+        );
+        observer.observe(btn);
+        return () => observer.disconnect();
+    }, []);
 
     useEffect(() => {
         if (!showSizeGuide) return;
@@ -111,7 +124,7 @@ export default function ProduitPage() {
         if (!activeSize) return;
         addItem({
             id: "adboots-pro",
-            name: "AD Boots Pro",
+            name: "Bottes récupératives",
             price: 350,
             size: activeSize,
             image: IMAGES[0],
@@ -128,7 +141,7 @@ export default function ProduitPage() {
                     <p style={{ fontSize: "0.78rem", color: "var(--muted)" }}>
                         <Link href="/" style={{ color: "var(--muted)", transition: "color 0.2s" }}>Accueil</Link>
                         <span style={{ margin: "0 8px" }}>·</span>
-                        <span>Ad Boots Pro</span>
+                        <span>Bottes récupératives</span>
                     </p>
                 </div>
             </div>
@@ -142,8 +155,8 @@ export default function ProduitPage() {
                             <div className="gallery-main">
                                 <img
                                     src={IMAGES[activeImg]}
-                                    alt="Ad Boots Pro"
-                                    style={{ width: "100%", height: "100%", objectFit: "contain", transition: "opacity 0.3s" }}
+                                    alt="Bottes récupératives"
+                                    style={{ width: "100%", height: "auto", display: "block", transition: "opacity 0.3s" }}
                                 />
                             </div>
                             <div className="gallery-thumbs">
@@ -164,7 +177,7 @@ export default function ProduitPage() {
                             <div className="anim-1">
                                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 16 }}>
                                 </div>
-                                <h1 className="heading-xl" style={{ marginBottom: 8 }}>AD Boots Pro</h1>
+                                <h1 className="heading-lg" style={{ marginBottom: 8 }}>Bottes récupératives</h1>
                                 <p style={{ color: "var(--muted)", fontSize: "0.9rem" }}>Bottes de compression pneumatique sans fil · 4 chambres</p>
                                 <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 12 }}>
                                     {[1,2,3,4,5].map(s => <IconStar key={s} size={13} color="var(--accent)" />)}
@@ -207,6 +220,7 @@ export default function ProduitPage() {
 
                             {/* Add to cart */}
                             <button
+                                ref={addBtnRef}
                                 className={`btn-primary anim-4${activeSize ? " btn-glow" : ""}`}
                                 style={{ width: "100%", justifyContent: "center", opacity: activeSize ? 1 : 0.45, cursor: activeSize ? "pointer" : "not-allowed", fontSize: "0.9rem" }}
                                 onClick={handleAddToCart}
@@ -243,7 +257,7 @@ export default function ProduitPage() {
                             </div>
 
                             <p style={{ fontSize: "0.9rem", lineHeight: 1.8, color: "var(--muted)" }}>
-                                AD Boots Pro sont des bottes de compression pneumatique sans fil à 4 chambres séquentielles. Contrôle via télécommande dédiée, recharge USB-C — la récupération professionnelle, accessible à domicile.
+                                Bottes récupératives sont des bottes de compression pneumatique sans fil à 4 chambres séquentielles. Contrôle via télécommande dédiée, recharge USB-C — la récupération professionnelle, accessible à domicile.
                             </p>
                         </div>
                     </div>
@@ -262,7 +276,7 @@ export default function ProduitPage() {
                         <div data-sr data-sr-delay="0" style={{ position: "relative", borderRadius: 8, overflow: "hidden", background: "#f8f8f6", border: "1px solid var(--border)", aspectRatio: "3/4" }}>
                             <img
                                 src="/assets/IMG_7954.JPG"
-                                alt="AD Boots Pro — manchons de compression"
+                                alt="Bottes récupératives — manchons de compression"
                                 style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
                                 loading="lazy"
                             />
@@ -303,7 +317,7 @@ export default function ProduitPage() {
             {/* ─── Tabs Section ─── */}
             <section style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
                 <div className="container">
-                    <div style={{ display: "flex", borderBottom: "1px solid var(--border)" }}>
+                    <div className="product-tabs-bar">
                         {([
                             { key: "benefits", label: "Bénéfices" },
                             { key: "specs",    label: "Caractéristiques" },
@@ -311,18 +325,11 @@ export default function ProduitPage() {
                         ] as const).map(t => (
                             <button
                                 key={t.key}
+                                className="product-tab-btn"
                                 onClick={() => setActiveTab(t.key)}
                                 style={{
-                                    padding: "18px 28px",
-                                    fontSize: "0.78rem",
-                                    fontWeight: 600,
-                                    letterSpacing: "0.1em",
-                                    textTransform: "uppercase",
                                     color: activeTab === t.key ? "var(--accent)" : "var(--muted)",
                                     borderBottom: activeTab === t.key ? "2px solid var(--accent)" : "2px solid transparent",
-                                    marginBottom: "-1px",
-                                    transition: "color 0.2s",
-                                    background: "none",
                                 }}
                             >
                                 {t.label}
@@ -381,7 +388,7 @@ export default function ProduitPage() {
             {/* ─── Reviews ─── */}
             <section className="section">
                 <div className="container">
-                    <div data-sr style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 48 }}>
+                    <div data-sr className="reviews-header">
                         <div>
                             <p className="label" style={{ marginBottom: 12 }}>Avis clients</p>
                             <h2 className="heading-lg">5.0 / 5</h2>
@@ -519,6 +526,24 @@ export default function ProduitPage() {
                             En cas de doute entre les deux tailles, choisissez la <strong style={{ color: "var(--fg)" }}>taille L</strong>. Les bottes s&apos;adaptent grâce au système de compression réglable.
                         </p>
                     </div>
+                </div>
+            )}
+
+            {/* ─── Sticky CTA (mobile) ─── */}
+            {showStickyCTA && (
+                <div className="sticky-cta">
+                    <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                        <span style={{ fontSize: "1.1rem", fontWeight: 800, color: "var(--fg)" }}>350 €</span>
+                        {activeSize && <span style={{ fontSize: "0.72rem", color: "var(--muted)" }}>Taille {activeSize} sélectionnée</span>}
+                    </div>
+                    <button
+                        className={`btn-primary${activeSize ? " btn-glow" : ""}`}
+                        style={{ flex: 1, maxWidth: 220, justifyContent: "center", opacity: activeSize ? 1 : 0.5, cursor: activeSize ? "pointer" : "not-allowed", fontSize: "0.85rem" }}
+                        onClick={handleAddToCart}
+                        disabled={!activeSize}
+                    >
+                        {added ? <><IconCheck size={14} color="#0a0a0a" /> Ajouté</> : activeSize ? "Ajouter au panier" : "Choisir une taille"}
+                    </button>
                 </div>
             )}
 

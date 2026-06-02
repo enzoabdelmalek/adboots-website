@@ -164,7 +164,7 @@ export default function HomePage() {
                     padding: "16px 24px",
                     display: "flex", flexDirection: "column", gap: 4,
                 }}>
-                    <p className="label" style={{ color: "rgba(255,255,255,0.5)", marginBottom: 4 }}>Ad Boots Pro</p>
+                    <p className="label" style={{ color: "rgba(255,255,255,0.5)", marginBottom: 4 }}>Bottes récupératives</p>
                     <p style={{ color: "#fff", fontWeight: 800, fontSize: "1.6rem", lineHeight: 1 }}>350 €</p>
                     <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.72rem" }}>Livraison offerte</p>
                 </div>
@@ -235,7 +235,7 @@ export default function HomePage() {
                                 ))}
                             </div>
                             <Link href="/produit" className="btn-primary" style={{ marginTop: 32, display: "inline-flex" }}>
-                                Découvrir AD Boots Pro
+                                Découvrir Bottes récupératives
                             </Link>
                         </div>
                     </div>
@@ -538,7 +538,7 @@ export default function HomePage() {
                                 highlight: false,
                             },
                             {
-                                label: "AD Boots Pro",
+                                label: "Bottes récupératives",
                                 price: "350 €",
                                 sub: "une seule fois",
                                 annual: "Rentabilisé dès la 3e séance",
@@ -683,7 +683,7 @@ export default function HomePage() {
                         <span className="text-shimmer">commence maintenant.</span>
                     </h2>
                     <p style={{ color: "var(--fg-2)", fontSize: "1rem", maxWidth: 440, margin: "0 auto 40px", lineHeight: 1.8 }}>
-                        AD Boots Pro · 350 € · Paiement sécurisé par Stripe<br />
+                        Bottes récupératives · 350 € · Paiement sécurisé par Stripe<br />
                         Livraison gratuite · Retour 30 jours · Garantie 2 ans
                     </p>
                     <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap", marginBottom: 28 }}>

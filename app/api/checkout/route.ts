@@ -20,7 +20,7 @@ const supabase = createClient(
 const BUSINESS_ID = "f9e291c2-0fea-4b24-8abb-57264e001cd3";
 
 const PRODUCT_CATALOG: Record<string, { name: string; price: number }> = {
-    "adboots-pro": { name: "AD Boots Pro", price: 350 },
+    "adboots-pro": { name: "Bottes récupératives", price: 350 },
 };
 
 interface CartItem {
