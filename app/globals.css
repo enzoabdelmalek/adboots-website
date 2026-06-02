@@ -72,7 +72,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 /* ─── Typography ─── */
 .display, .ad-display {
     font-family: var(--font-display), "Archivo", sans-serif;
-    font-size: clamp(3.5rem, 9vw, 8rem);
+    font-size: clamp(2.2rem, 9vw, 8rem);
     font-weight: 900;
     line-height: 0.92;
     letter-spacing: -0.02em;
@@ -450,7 +450,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .mobile-menu.open { display: flex; }
 .mobile-menu a {
     font-family: var(--font-display), "Archivo", sans-serif;
-    font-size: clamp(2rem, 6vw, 3rem);
+    font-size: clamp(1.3rem, 5vw, 2.5rem);
     font-weight: 900;
     letter-spacing: -0.02em;
     text-transform: uppercase;
@@ -793,6 +793,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .btn-glow {
     animation: glowPulse 2.8s 1.5s ease-in-out infinite;
 }
+
+.hero-price-badge { display: flex; }
 
 /* ── Floating badge ── */
 .float-badge {

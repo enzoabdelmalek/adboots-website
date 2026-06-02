@@ -162,7 +162,7 @@ export default function HomePage() {
                     border: "1px solid rgba(255,255,255,0.12)",
                     borderRadius: 10,
                     padding: "16px 24px",
-                    display: "flex", flexDirection: "column", gap: 4,
+                    flexDirection: "column", gap: 4,
                 }}>
                     <p className="label" style={{ color: "rgba(255,255,255,0.5)", marginBottom: 4 }}>Bottes récupératives</p>
                     <p style={{ color: "#fff", fontWeight: 800, fontSize: "1.6rem", lineHeight: 1 }}>350 €</p>
